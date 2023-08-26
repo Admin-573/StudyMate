@@ -26,10 +26,19 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="22sp" />
 
-        <ImageView
-            android:layout_width="256dp"
-            android:layout_height="256dp"
-            android:src="@drawable/faculty" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/under_dev"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/faculty_login" />
     </LinearLayout>
 
     <LinearLayout
@@ -43,15 +52,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:fontFamily="@font/ubuntu"
-            android:text="Faculty ~"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="28sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_marginBottom="8dp"

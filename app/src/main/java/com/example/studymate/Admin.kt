@@ -3,7 +3,9 @@ package com.example.studymate
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PatternMatcher
 import android.util.Log
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -34,11 +36,19 @@ class Admin : AppCompatActivity() {
         admin_login.setOnClickListener {
             if(validation_admin()){
                 addAdmin()
+                clearFields()
             }
         }
         admin_back.setOnClickListener {
             onBackPressed()
         }
+    }
+
+    private fun clearFields() {
+        admin_org_no.setText("")
+        admin_name.setText("")
+        admin_email.setText("")
+        admin_org_no.requestFocus()
     }
 
     //Adding Admin Data To DB
@@ -68,7 +78,8 @@ class Admin : AppCompatActivity() {
         } else if(admin_email.length()==0){
             admin_email.setError("Email ID Required")
             return false
-        } else {
+        }
+        else {
             if (admin_org_no.text.toString() == "India@123"){
                 val Admin_panel = Intent(applicationContext,Admin_panel::class.java)
                 startActivity(Admin_panel)

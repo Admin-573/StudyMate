@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
-    android:layout_marginStart="16dp"
-    android:background="@color/white">
+    android:layout_marginStart="16dp">
 
     <ImageView
         android:src="@drawable/name"
@@ -13,18 +12,17 @@
         android:layout_height="60dp"/>
     
     <TextView
-        android:id="@+id/admin_name"
+        android:id="@+id/admin_name_head"
         android:text="Admin"
         android:paddingTop="8dp"
-        android:textSize="22sp"
-        android:textColor="@color/black"
+        android:textSize="24sp"
         android:fontFamily="@font/ubuntu"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:id="@+id/admin_email"
+        android:id="@+id/admin_email_head"
         android:text="Admin@gmail.com"
         android:paddingTop="8dp"
         android:textSize="18sp"

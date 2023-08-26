@@ -15,7 +15,7 @@
         android:id="@+id/btnAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Admin >>"
+        android:text="Admin"
         style="@style/Widget.Material3.Button.TextButton"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -29,20 +29,29 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.106">
+        app:layout_constraintVertical_bias="0.172">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ubuntu"
             android:text="StudyMate"
-            android:textSize="28sp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="28sp" />
 
-        <ImageView
-            android:layout_width="256dp"
-            android:layout_height="256dp"
-            android:src="@drawable/studymate" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/under_dev"
+            android:layout_width="380dp"
+            android:layout_height="420dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/home" />
     </LinearLayout>
 
     <LinearLayout
