@@ -15,24 +15,25 @@ class Admin_panel : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_panel)
 
+        //Navigation Drawer
         val drawerLayout : DrawerLayout = findViewById(R.id.drawerLayout)
         val navView : NavigationView = findViewById(R.id.nav_view)
-
         toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
-
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         navView.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.admin_nav_profile -> Toast.makeText(this,"Profile",Toast.LENGTH_SHORT).show()
             }
             true
         }
+
+        //Admin Adds Faculty
+
     }
 
+    //Navigation Drawer
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item)){
             return true
