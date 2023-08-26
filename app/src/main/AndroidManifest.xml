@@ -19,6 +19,7 @@
             android:name=".Faculty_panel"
             android:exported="false" />
         <activity
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
             android:name=".Admin_panel"
             android:exported="false" />
         <activity

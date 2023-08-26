@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Admin">
+
+        <menu>
+
+            <item
+                android:id="@+id/admin_nav_profile"
+                android:title="Admin Profile"
+                android:icon="@drawable/admin_profile" />
+
+            <item
+                android:id="@+id/admin_nav_addfaculty"
+                android:title="Add Faculty"
+                android:icon="@drawable/add_faculty" />
+
+            <item
+                android:id="@+id/admin_nav_addstudent"
+                android:title="Add Student"
+                android:icon="@drawable/add_student" />
+
+        </menu>
+
+    </item>
+
+
+    <item android:title="Data">
+
+        <menu>
+
+            <item
+                android:id="@+id/admin_nav_notices"
+                android:title="Add Notices"
+                android:icon="@drawable/add_notices" />
+
+            <item
+                android:id="@+id/admin_nav_assignments"
+                android:title="Add Assignments"
+                android:icon="@drawable/add_assignments" />
+
+        </menu>
+
+    </item>
+
+    <item android:title="Profile">
+
+        <menu>
+
+            <item
+                android:id="@+id/admin_nav_logout"
+                android:title="Logout"
+                android:icon="@drawable/logout" />
+
+        </menu>
+
+    </item>
+
+    <item android:title="Communicate">
+
+        <menu>
+
+            <item
+                android:id="@+id/admin_nav_contactUs"
+                android:title="Contact Us"
+                android:icon="@drawable/contact_us" />
+
+            <item
+                android:id="@+id/admin_nav_aboutUs"
+                android:title="About Us"
+                android:icon="@drawable/about_us" />
+
+        </menu>
+
+    </item>
+
+</menu>
