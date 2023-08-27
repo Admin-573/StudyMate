@@ -1,5 +1,7 @@
 package com.example.studymate
 
+import java.util.Date
+
 data class AdminModel (
     // Admin Content
     var admin_name : String = "",
@@ -18,5 +20,12 @@ data class AdminModel (
     var student_class : String = "",
 
     //Notice Content
+    var notice_name : String = "",
+    var notice_des : String = "",
+    var notice_date : String = "",
 
+    //Assignment Content
+    var assignment_name : String = "",
+    var assignment_sdate : String = "",
+    var assignment_type : String = "",
 )

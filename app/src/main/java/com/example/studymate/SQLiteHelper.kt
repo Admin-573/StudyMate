@@ -32,6 +32,18 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME,nu
         private const val STUDENT_EMAIL = "student_email"
         private const val STUDENT_PASSWORD = "student_password"
         private const val STUDENT_CLASS = "student_class"
+
+        //Notice Table
+        private const val TBL_NOTICE = "tbl_notice"
+        private const val NOTICE_NAME = "notice_name"
+        private const val NOTICE_DES = "notice_des"
+        private const val NOTICE_DATE = "notice_date"
+
+        //Assignment Table
+        private const val TBL_ASSIGNMENT = "tbl_assignment"
+        private const val ASSIGNMENT_NAME = "assignment_name"
+        private const val ASSIGNMENT_TYPE = "assignment_type"
+        private const val ASSIGNMENT_SDATE = "assignment_sdate"
     }
 
     override fun onCreate(p0: SQLiteDatabase?) {
@@ -46,6 +58,14 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME,nu
         //Student Table
         val createTblStudent = "CREATE TABLE $TBL_STUDENT($STUDENT_NAME TEXT,$STUDENT_EMAIL VARCHAR(128) PRIMARY KEY,$STUDENT_PASSWORD TEXT,$STUDENT_CLASS VARCHAR(256));"
         p0?.execSQL(createTblStudent)
+
+        //Notice Table
+        val createTblNotice = "CREATE TABLE $TBL_NOTICE($NOTICE_NAME TEXT PRIMARY KEY,$NOTICE_DES VARCHAR(512),$NOTICE_DATE TEXT);"
+        p0?.execSQL(createTblNotice)
+
+        //Assignment Table
+        val createTblAssignment = "CREATE TABLE $TBL_ASSIGNMENT($ASSIGNMENT_NAME TEXT PRIMARY KEY,$ASSIGNMENT_SDATE TEXT,$ASSIGNMENT_TYPE VARCHAR(256));"
+        p0?.execSQL(createTblAssignment)
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
@@ -59,6 +79,14 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME,nu
 
         //Student Table
         p0!!.execSQL("DROP TABLE IF EXISTS $TBL_STUDENT")
+        onCreate(p0)
+
+        //Notice Table
+        p0!!.execSQL("DROP TABLE IF EXISTS $TBL_NOTICE")
+        onCreate(p0)
+
+        //Assignment Table
+        p0!!.execSQL("DROP TABLE IF EXISTS $TBL_ASSIGNMENT")
         onCreate(p0)
     }
 
@@ -236,4 +264,68 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME,nu
         db.close()
         return UpdateQuery
     }
+
+
+    //Inserting Notices
+    fun InsertNotice(adm : AdminModel):Long{
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(NOTICE_NAME,adm.notice_name)
+        contentValues.put(NOTICE_DES,adm.notice_des)
+        contentValues.put(NOTICE_DATE,adm.notice_date)
+
+        val insertQuery = db.insert(TBL_NOTICE,null,contentValues)
+        db.close()
+        return insertQuery
+    }
+
+    //Displaying Notices
+    @SuppressLint("Range")
+    fun getAllNotice(): ArrayList<AdminModel> {
+        val admList : ArrayList<AdminModel> = ArrayList()
+        val selectQuery = "SELECT * FROM $TBL_NOTICE"
+        val db = this.writableDatabase
+
+        val cursor : Cursor?
+
+        try{
+            cursor = db.rawQuery(selectQuery,null)
+        } catch (e : Exception) {
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+
+        var name : String
+        var des : String
+        var ndate : String
+
+        if(cursor.moveToFirst()){
+            do{
+
+                name = cursor.getString(cursor.getColumnIndex("notice_name"))
+                des = cursor.getString(cursor.getColumnIndex("notice_des"))
+                ndate = cursor.getString(cursor.getColumnIndex("notice_date"))
+
+                val adm = AdminModel(notice_name = name, notice_des = des, notice_date = ndate)
+                admList.add(adm)
+
+            } while (cursor.moveToNext())
+        }
+        return admList
+    }
+
+    //Delete Notices
+    fun DeleteNotice(name_notice: String): Int{
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(NOTICE_NAME,name_notice)
+
+        val DeleteQuery = db.delete(TBL_NOTICE,"notice_name=$NOTICE_NAME",null)
+        db.close()
+        return DeleteQuery
+    }
+
 }
