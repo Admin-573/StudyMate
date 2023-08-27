@@ -16,4 +16,7 @@ data class AdminModel (
     var student_email : String = "",
     var student_password : String = "",
     var student_class : String = "",
+
+    //Notice Content
+
 )

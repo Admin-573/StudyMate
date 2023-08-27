@@ -118,7 +118,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME,nu
 
                 name = cursor.getString(cursor.getColumnIndex("faculty_name"))
                 email = cursor.getString(cursor.getColumnIndex("faculty_email"))
-                password = cursor.getColumnName(cursor.getColumnIndex("faculty_password"))
+                password = cursor.getString(cursor.getColumnIndex("faculty_password"))
                 subject = cursor.getString(cursor.getColumnIndex("faculty_sub"))
 
                 val adm = AdminModel(faculty_name = name, faculty_email = email, faculty_password = password, faculty_sub = subject)
@@ -139,6 +139,21 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME,nu
         val DeleteQuery = db.delete(TBL_FACULTY,"faculty_email=$FACULTY_EMAIL",null)
         db.close()
         return DeleteQuery
+    }
+
+    //Updating Data Of Faculty
+    fun updateFacultyByEmail(adm: AdminModel): Int {
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(FACULTY_NAME,adm.faculty_name)
+        contentValues.put(FACULTY_SUB,adm.faculty_sub)
+        contentValues.put(FACULTY_PASSWORD,adm.faculty_password)
+
+        val email = adm.faculty_email
+        val UpdateQuery = db.update(TBL_FACULTY,contentValues,"${FACULTY_EMAIL} = '$email'",null)
+        db.close()
+        return UpdateQuery
     }
 
     //Inserting Data Of Student

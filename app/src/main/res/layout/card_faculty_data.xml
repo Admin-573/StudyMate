@@ -17,8 +17,9 @@
         android:orientation="vertical">
 
         <TextView
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
+            android:layout_marginBottom="4dp"
             android:id="@+id/faculty_view_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,18 +29,20 @@
 
         <TextView
             android:id="@+id/faculty_view_email"
+            android:layout_marginBottom="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="16dp"
             android:textColor="@color/black"
             android:fontFamily="@font/ubuntu"
             tools:text="Email"/>
 
         <TextView
             android:id="@+id/faculty_view_sub"
+            android:layout_marginBottom="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="16dp"
             android:textColor="@color/black"
             android:fontFamily="@font/ubuntu"
             tools:text="Subject"/>

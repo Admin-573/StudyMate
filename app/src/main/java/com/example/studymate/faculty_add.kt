@@ -6,14 +6,13 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class faculty_add : AppCompatActivity() {
 
     private lateinit var faculty_name : EditText
     private lateinit var faculty_email : EditText
-    private lateinit var faculty_pass : EditText
+    private lateinit var faculty_password : EditText
     private lateinit var faculty_sub : EditText
     private lateinit var btn_add_faculty : Button
     private lateinit var btn_back : Button
@@ -44,7 +43,7 @@ class faculty_add : AppCompatActivity() {
     private fun clearFaculty() {
         faculty_name.setText("")
         faculty_email.setText("")
-        faculty_pass.setText("")
+        faculty_password.setText("")
         faculty_sub.setText("")
         faculty_name.requestFocus()
     }
@@ -52,7 +51,7 @@ class faculty_add : AppCompatActivity() {
     private fun addFaculty() {
         val name = faculty_name.text.toString()
         val email = faculty_email.text.toString()
-        val pass = faculty_pass.text.toString()
+        val pass = faculty_password.text.toString()
         val sub = faculty_sub.text.toString()
         val adm = AdminModel(faculty_name = name, faculty_email = email, faculty_password = pass, faculty_sub = sub)
         val status = sqLiteHelper.InsertFaculty(adm)
@@ -70,8 +69,8 @@ class faculty_add : AppCompatActivity() {
         } else if(faculty_email.length()==0){
             faculty_email.setError("Email Can't Be Empty")
             return false
-        } else if(faculty_pass.length()==0){
-            faculty_pass.setError("Password Required")
+        } else if(faculty_password.length()==0){
+            faculty_password.setError("Password Required")
             return false
         } else if(faculty_sub.length()==0) {
             faculty_sub.setError("Subject Needed")
@@ -83,7 +82,7 @@ class faculty_add : AppCompatActivity() {
     private fun initView() {
         faculty_name = findViewById(R.id.Admin_add_faculty_name)
         faculty_email = findViewById(R.id.Admin_add_faculty_email)
-        faculty_pass = findViewById(R.id.Admin_add_faculty_pass)
+        faculty_password = findViewById(R.id.Admin_add_faculty_pass)
         faculty_sub = findViewById(R.id.Admin_add_faculty_sub)
         btn_add_faculty = findViewById(R.id.btnAdmin_add_faculty)
         btn_back = findViewById(R.id.btnBack)

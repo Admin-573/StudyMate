@@ -1,7 +1,9 @@
 package com.example.studymate
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,7 +30,11 @@ class faculty_view : AppCompatActivity() {
 
         adapter?.setOnClickItem{
             Toast.makeText(this,it.faculty_name,Toast.LENGTH_SHORT).show()
-
+            startActivity(Intent(applicationContext,faculty_update::class.java)
+                .putExtra("faculty_name",it.faculty_name)
+                .putExtra("faculty_email",it.faculty_email)
+                .putExtra("faculty_pass",it.faculty_password)
+                .putExtra("faculty_sub",it.faculty_sub))
         }
     }
     private fun initRecyclerView() {
