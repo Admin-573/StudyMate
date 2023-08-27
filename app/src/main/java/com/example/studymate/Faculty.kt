@@ -22,7 +22,7 @@ class Faculty : AppCompatActivity() {
         setContentView(R.layout.activity_faculty)
 
         frgt_pass = findViewById(R.id.frgt_pass_faculty)
-        faculty_id = findViewById(R.id.EdtFacultyNo)
+        faculty_id = findViewById(R.id.EdtFacultyName)
         faculty_email = findViewById(R.id.EdtFacultyEmail)
         faculty_pass = findViewById(R.id.EdtFacultyPass)
         faculty_login = findViewById(R.id.btnFaculty_login)

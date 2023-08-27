@@ -40,7 +40,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/admin_add_faculty"
+                    android:id="@+id/admin_view_faculty"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_gravity="center"
@@ -67,7 +67,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/admin_add_student"
+                    android:id="@+id/admin_view_student"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_gravity="center"
@@ -102,7 +102,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/admin_add_notice"
+                    android:id="@+id/admin_view_notice"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_gravity="center"
@@ -129,7 +129,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/admin_add_assignment"
+                    android:id="@+id/admin_view_assignment"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_gravity="center"

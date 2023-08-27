@@ -62,27 +62,27 @@ class Admin_panel : AppCompatActivity() {
         }
 
         //Admin Adds Faculty
-        add_faculty = findViewById(R.id.admin_add_faculty)
+        add_faculty = findViewById(R.id.admin_view_faculty)
         add_faculty.setOnClickListener{
-            Toast.makeText(this,"Add Faculty",Toast.LENGTH_SHORT).show()
+            startActivity(Intent(applicationContext,faculty_view::class.java))
         }
 
         //Admin Adds Student
-        add_student = findViewById(R.id.admin_add_student)
+        add_student = findViewById(R.id.admin_view_student)
         add_student.setOnClickListener{
-            Toast.makeText(this,"Add Student",Toast.LENGTH_SHORT).show()
+            startActivity(Intent(applicationContext,student_view::class.java))
         }
 
         //Admin Adds Notices
-        add_notice = findViewById(R.id.admin_add_notice)
+        add_notice = findViewById(R.id.admin_view_notice)
         add_notice.setOnClickListener{
-            Toast.makeText(this,"Add Notice",Toast.LENGTH_SHORT).show()
+            startActivity(Intent(applicationContext,notice_view::class.java))
         }
 
         //Admin Adds Assignments
-        add_assignment = findViewById(R.id.admin_add_assignment)
+        add_assignment = findViewById(R.id.admin_view_assignment)
         add_assignment.setOnClickListener{
-            Toast.makeText(this,"Add Assignment",Toast.LENGTH_SHORT).show()
+            startActivity(Intent(applicationContext,assignment_view::class.java))
         }
 
         //Admin AboutUS

@@ -59,16 +59,16 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            app:placeholderText="Faculty ID">
+            app:placeholderText="Faculty Name">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/EdtFacultyNo"
+                android:id="@+id/EdtFacultyName"
                 android:inputType="text"
-                android:drawableLeft="@drawable/org_no"
+                android:drawableLeft="@drawable/admin_add_faculty_name"
                 android:drawablePadding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Faculty No"/>
+                android:hint="Enter Faculty Name"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

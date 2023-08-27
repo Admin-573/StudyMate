@@ -13,6 +13,18 @@
         android:theme="@style/Theme.StudyMate"
         tools:targetApi="31">
         <activity
+            android:name=".assignment_view"
+            android:exported="false" />
+        <activity
+            android:name=".notice_view"
+            android:exported="false" />
+        <activity
+            android:name=".student_view"
+            android:exported="false" />
+        <activity
+            android:name=".faculty_view"
+            android:exported="false" />
+        <activity
             android:name=".assignment_add"
             android:exported="false" />
         <activity
@@ -33,7 +45,7 @@
         <activity
             android:name=".Admin_panel"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
             android:name=".Student"
             android:exported="false" />

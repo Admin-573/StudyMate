@@ -61,16 +61,16 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            app:placeholderText="Student ID">
+            app:placeholderText="Student Name">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/EdtStudentNo"
+                android:id="@+id/EdtStudentName"
                 android:inputType="text"
-                android:drawableLeft="@drawable/org_no"
+                android:drawableLeft="@drawable/admin_profile"
                 android:drawablePadding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Student No"/>
+                android:hint="Enter Student Name"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
