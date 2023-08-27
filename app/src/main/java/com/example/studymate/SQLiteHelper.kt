@@ -171,4 +171,69 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME,nu
         return insertQuery
     }
 
+    //Displaying Data Of Student
+    @SuppressLint("Range")
+    fun getAllStudent() : ArrayList<AdminModel>
+    {
+        val admList : ArrayList<AdminModel> = ArrayList()
+        val selectQuery = "SELECT * FROM $TBL_STUDENT"
+        val db = this.writableDatabase
+
+        val cursor : Cursor?
+
+        try{
+            cursor = db.rawQuery(selectQuery,null)
+        } catch (e : Exception) {
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+
+        var name : String
+        var email : String
+        var password : String
+        var stud_class : String
+
+        if(cursor.moveToFirst()){
+            do{
+
+                name = cursor.getString(cursor.getColumnIndex("student_name"))
+                email = cursor.getString(cursor.getColumnIndex("student_email"))
+                password = cursor.getString(cursor.getColumnIndex("student_password"))
+                stud_class = cursor.getString(cursor.getColumnIndex("student_class"))
+
+                val adm = AdminModel(student_name = name, student_email = email, student_password = password, student_class = stud_class)
+                admList.add(adm)
+
+            } while (cursor.moveToNext())
+        }
+        return admList
+    }
+
+    //Deleting Data Of Student
+    fun DeleteStudent(email: String): Int{
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(STUDENT_EMAIL,email)
+
+        val DeleteQuery = db.delete(TBL_STUDENT,"student_email=$STUDENT_EMAIL",null)
+        db.close()
+        return DeleteQuery
+    }
+
+    //Updating Data Of Student
+    fun updateStudentByEmail(adm: AdminModel): Int {
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(STUDENT_NAME,adm.student_name)
+        contentValues.put(STUDENT_PASSWORD,adm.student_password)
+        contentValues.put(STUDENT_CLASS,adm.student_class)
+
+        val email = adm.student_email
+        val UpdateQuery = db.update(TBL_STUDENT,contentValues,"${STUDENT_EMAIL} = '$email'",null)
+        db.close()
+        return UpdateQuery
+    }
 }
