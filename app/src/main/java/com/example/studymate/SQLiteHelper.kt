@@ -328,4 +328,67 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME,nu
         return DeleteQuery
     }
 
+
+    //Inserting Assignments
+    fun InsertAssignment(adm: AdminModel): Long {
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(ASSIGNMENT_NAME,adm.assignment_name)
+        contentValues.put(ASSIGNMENT_SDATE,adm.assignment_sdate)
+        contentValues.put(ASSIGNMENT_TYPE,adm.assignment_type)
+
+        val insertQuery = db.insert(TBL_ASSIGNMENT,null,contentValues)
+        db.close()
+        return insertQuery
+    }
+
+    //Displaying Assignments
+    @SuppressLint("Range")
+    fun getAllAssignment(): ArrayList<AdminModel> {
+        val admList : ArrayList<AdminModel> = ArrayList()
+        val selectQuery = "SELECT * FROM $TBL_ASSIGNMENT"
+        val db = this.writableDatabase
+
+        val cursor : Cursor?
+
+        try{
+            cursor = db.rawQuery(selectQuery,null)
+        } catch (e : Exception) {
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+
+        var name : String
+        var sdate : String
+        var stype : String
+
+        if(cursor.moveToFirst()){
+            do{
+
+                name = cursor.getString(cursor.getColumnIndex("assignment_name"))
+                sdate = cursor.getString(cursor.getColumnIndex("assignment_sdate"))
+                stype = cursor.getString(cursor.getColumnIndex("assignment_type"))
+
+                val adm = AdminModel(assignment_name = name, assignment_sdate = sdate, assignment_type = stype)
+                admList.add(adm)
+
+            } while (cursor.moveToNext())
+        }
+        return admList
+    }
+
+    //Deleting Assignments
+    fun DeleteAssignment(name_assign: String): Int{
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(ASSIGNMENT_NAME,name_assign)
+
+        val DeleteQuery = db.delete(TBL_ASSIGNMENT,"assignment_name=$ASSIGNMENT_NAME",null)
+        db.close()
+        return DeleteQuery
+    }
+
 }
