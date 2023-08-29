@@ -3,6 +3,7 @@ package com.example.studymate
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -34,6 +35,10 @@ class Admin : AppCompatActivity() {
         admin_login.setOnClickListener {
             if(validation_admin()){
                 addAdmin()
+//                val strName = admin_name.text.toString()
+//                val strEmail = admin_email.text.toString()
+//                intent.putExtra("Name",strName)
+//                intent.putExtra("Email",strEmail)
                 clearFields()
             }
         }
@@ -57,7 +62,7 @@ class Admin : AppCompatActivity() {
         val status = sqLiteHelper.InsertAdmin(adm)
         if(status > -1)
         {
-            Toast.makeText(this,"Admin Logged In",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"New Admin Added",Toast.LENGTH_SHORT).show()
         }
         else
         {
@@ -76,13 +81,16 @@ class Admin : AppCompatActivity() {
         } else if(admin_email.length()==0){
             admin_email.setError("Email ID Required")
             return false
+        } else if(!Patterns.EMAIL_ADDRESS.matcher(admin_email.text.toString()).matches()){
+            Toast.makeText(this,"Email Format Wrong",Toast.LENGTH_SHORT).show()
+            return false
         }
         else {
             if (admin_org_no.text.toString() == "India@123"){
-                val Admin_panel = Intent(applicationContext, Admin_panel::class.java)
-                startActivity(Admin_panel)
+                startActivity(Intent(applicationContext,Admin_panel::class.java))
             } else {
                 admin_org_no.setError("Security ID Wrong")
+                return false
             }
         }
         return true
