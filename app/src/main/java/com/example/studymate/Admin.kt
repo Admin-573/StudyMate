@@ -35,10 +35,6 @@ class Admin : AppCompatActivity() {
         admin_login.setOnClickListener {
             if(validation_admin()){
                 addAdmin()
-//                val strName = admin_name.text.toString()
-//                val strEmail = admin_email.text.toString()
-//                intent.putExtra("Name",strName)
-//                intent.putExtra("Email",strEmail)
                 clearFields()
             }
         }
