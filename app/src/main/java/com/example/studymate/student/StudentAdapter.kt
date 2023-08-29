@@ -1,4 +1,4 @@
-package com.example.studymate
+package com.example.studymate.student
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,8 +6,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.studymate.R
+import com.example.studymate.database.AdminModel
 
-class AssignmentAdapter : RecyclerView.Adapter<AssignmentAdapter.AssignmentViewHolder>() {
+class StudentAdapter : RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
 
     private var admList : ArrayList<AdminModel> = ArrayList()
     private var onClickItem : ((AdminModel) -> Unit) ?= null
@@ -25,15 +27,15 @@ class AssignmentAdapter : RecyclerView.Adapter<AssignmentAdapter.AssignmentViewH
     fun setOnClickDeleteItem(callback: ((AdminModel) -> Unit)){
         this.onClickDeleteItem = callback
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)= AssignmentViewHolder (
-        LayoutInflater.from(parent.context).inflate(R.layout.card_assignment_data,parent,false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)= StudentViewHolder (
+        LayoutInflater.from(parent.context).inflate(R.layout.card_student_data,parent,false)
     )
 
     override fun getItemCount(): Int {
         return admList.size
     }
 
-    override fun onBindViewHolder(holder: AssignmentViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
         val adm = admList[position]
         holder.bindView(adm)
         holder.itemView.setOnClickListener{
@@ -44,17 +46,16 @@ class AssignmentAdapter : RecyclerView.Adapter<AssignmentAdapter.AssignmentViewH
         }
     }
 
-    class AssignmentViewHolder(var view: View): RecyclerView.ViewHolder(view) {
-        private var name = view.findViewById<TextView>(R.id.view_assignment_name)
-        private var sdate = view.findViewById<TextView>(R.id.view_assignment_date)
-        private var stype = view.findViewById<TextView>(R.id.view_assignment_type)
-        var btnDelete = view.findViewById<Button>(R.id.btnDeleteAssignment)
+    class StudentViewHolder(var view: View): RecyclerView.ViewHolder(view) {
+        private var name = view.findViewById<TextView>(R.id.student_view_name)
+        private var email = view.findViewById<TextView>(R.id.student_view_email)
+        private var sub = view.findViewById<TextView>(R.id.student_view_sub)
+        var btnDelete = view.findViewById<Button>(R.id.btnDeleteStudent)
 
         fun bindView(adm : AdminModel){
-            name.text = adm.assignment_name
-            sdate.text = adm.assignment_sdate
-            stype.text = adm.assignment_type
+            name.text = adm.student_name
+            email.text = adm.student_email
+            sub.text = adm.student_class
         }
     }
 }
-

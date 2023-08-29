@@ -1,19 +1,21 @@
-package com.example.studymate
+package com.example.studymate.faculty
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.studymate.R
+import com.example.studymate.database.AdminModel
+import com.example.studymate.database.SQLiteHelper
 
 class faculty_view : AppCompatActivity() {
     private lateinit var sqlitehelper : SQLiteHelper
     private lateinit var recyclerView : RecyclerView
-    private var adapter : FacultyAdapter ?= null
-    private var adm : AdminModel ?= null
+    private var adapter : FacultyAdapter?= null
+    private var adm : AdminModel?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_faculty_view)
@@ -30,7 +32,7 @@ class faculty_view : AppCompatActivity() {
 
         adapter?.setOnClickItem{
             Toast.makeText(this,it.faculty_name,Toast.LENGTH_SHORT).show()
-            startActivity(Intent(applicationContext,faculty_update::class.java)
+            startActivity(Intent(applicationContext, faculty_update::class.java)
                 .putExtra("faculty_name",it.faculty_name)
                 .putExtra("faculty_email",it.faculty_email)
                 .putExtra("faculty_pass",it.faculty_password)

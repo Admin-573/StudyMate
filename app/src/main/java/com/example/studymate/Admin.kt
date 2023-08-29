@@ -3,15 +3,13 @@ package com.example.studymate
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PatternMatcher
-import android.util.Log
-import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
-import androidx.recyclerview.widget.RecyclerView.Recycler
+import com.example.studymate.database.AdminModel
+import com.example.studymate.admin.Admin_panel
+import com.example.studymate.database.SQLiteHelper
 
 class Admin : AppCompatActivity() {
 
@@ -24,7 +22,7 @@ class Admin : AppCompatActivity() {
 
     private lateinit var sqLiteHelper: SQLiteHelper
     private lateinit var recyclerView: RecyclerView
-    private var adm: AdminModel ?= null
+    private var adm: AdminModel?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,7 +79,7 @@ class Admin : AppCompatActivity() {
         }
         else {
             if (admin_org_no.text.toString() == "India@123"){
-                val Admin_panel = Intent(applicationContext,Admin_panel::class.java)
+                val Admin_panel = Intent(applicationContext, Admin_panel::class.java)
                 startActivity(Admin_panel)
             } else {
                 admin_org_no.setError("Security ID Wrong")

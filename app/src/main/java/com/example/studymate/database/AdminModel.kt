@@ -1,4 +1,4 @@
-package com.example.studymate
+package com.example.studymate.database
 
 import java.util.Date
 

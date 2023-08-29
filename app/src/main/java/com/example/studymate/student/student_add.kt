@@ -1,4 +1,4 @@
-package com.example.studymate
+package com.example.studymate.student
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +7,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
+import com.example.studymate.R
+import com.example.studymate.database.AdminModel
+import com.example.studymate.database.SQLiteHelper
 
 class student_add : AppCompatActivity() {
     private lateinit var student_name : EditText
@@ -20,8 +22,8 @@ class student_add : AppCompatActivity() {
 
     private lateinit var sqLiteHelper: SQLiteHelper
     private lateinit var recyclerView: RecyclerView
-    private var adapter: StudentAdapter ?= null
-    private var adm : AdminModel ?= null
+    private var adapter: StudentAdapter?= null
+    private var adm : AdminModel?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +36,7 @@ class student_add : AppCompatActivity() {
             if(studentValidation()){
                 addStudent()
                 clearFields()
-                startActivity(Intent(applicationContext,student_view::class.java))
+                startActivity(Intent(applicationContext, student_view::class.java))
             }
         }
 

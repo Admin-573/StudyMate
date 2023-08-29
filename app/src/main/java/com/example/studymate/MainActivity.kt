@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         btnStudent = findViewById(R.id.btnStudent)
 
         btnAdmin.setOnClickListener {
-            val Admin = Intent(applicationContext,Admin::class.java)
+            val Admin = Intent(applicationContext, Admin::class.java)
             startActivity(Admin)
         }
         btnFaculty.setOnClickListener {

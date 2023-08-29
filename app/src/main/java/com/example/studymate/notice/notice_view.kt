@@ -1,4 +1,4 @@
-package com.example.studymate
+package com.example.studymate.notice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,38 +6,41 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.studymate.R
+import com.example.studymate.database.AdminModel
+import com.example.studymate.database.SQLiteHelper
 
-class assignment_view : AppCompatActivity() {
+class notice_view : AppCompatActivity() {
     private lateinit var sqlitehelper : SQLiteHelper
     private lateinit var recyclerView : RecyclerView
-    private var adapter : AssignmentAdapter ?= null
-    private var adm : AdminModel ?= null
+    private var adapter : NoticeAdapter?= null
+    private var adm : AdminModel?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_assignment_view)
+        setContentView(R.layout.activity_notice_view)
 
         sqlitehelper = SQLiteHelper(this)
         initRecyclerView()
 
-        val admList = sqlitehelper.getAllAssignment()
+        val admList = sqlitehelper.getAllNotice()
         adapter?.addItems(admList)
 
         adapter?.setOnClickDeleteItem {
-            deleteAssignment(it.assignment_name)
+            deleteNotice(it.notice_name)
         }
 
         adapter?.setOnClickItem{
-            Toast.makeText(this,it.assignment_name,Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,it.notice_name,Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun deleteAssignment(name_assign: String) {
+    private fun deleteNotice(name: String) {
         val builder = AlertDialog.Builder(this)
-        builder.setMessage("Do You Want To Delete This Assignment ?")
+        builder.setMessage("Do You Want To Delete This Notice ?")
         builder.setCancelable(true)
         builder.setPositiveButton("Yes") { dialog,_->
-            sqlitehelper.DeleteAssignment(name_assign)
-            getAssignment()
+            sqlitehelper.DeleteNotice(name)
+            getNotice()
             dialog.dismiss()
         }
         builder.setNegativeButton("No"){ dialog,_->
@@ -47,16 +50,15 @@ class assignment_view : AppCompatActivity() {
         alert.show()
     }
 
-    private fun getAssignment() {
-        val admList = sqlitehelper.getAllAssignment()
+    private fun getNotice() {
+        val admList = sqlitehelper.getAllNotice()
         adapter?.addItems(admList)
     }
 
-
     private fun initRecyclerView() {
-        recyclerView = findViewById(R.id.recyclerViewAssignment)
+        recyclerView = findViewById(R.id.recyclerViewNotice)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = AssignmentAdapter()
+        adapter = NoticeAdapter()
         recyclerView.adapter = adapter
     }
 }

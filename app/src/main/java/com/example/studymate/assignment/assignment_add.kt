@@ -1,4 +1,4 @@
-package com.example.studymate
+package com.example.studymate.assignment
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.studymate.R
+import com.example.studymate.database.AdminModel
+import com.example.studymate.database.SQLiteHelper
 import com.google.android.material.datepicker.MaterialDatePicker
 
 class assignment_add : AppCompatActivity() {

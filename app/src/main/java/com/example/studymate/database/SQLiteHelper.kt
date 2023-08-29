@@ -1,4 +1,4 @@
-package com.example.studymate
+package com.example.studymate.database
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
@@ -8,7 +8,10 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import java.lang.Exception
 
-class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME,null,DATABASE_VERSION) {
+class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
+    DATABASE_NAME,null,
+    DATABASE_VERSION
+) {
 
     companion object{
         private const val DATABASE_NAME = "student.db"
@@ -179,7 +182,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME,nu
         contentValues.put(FACULTY_PASSWORD,adm.faculty_password)
 
         val email = adm.faculty_email
-        val UpdateQuery = db.update(TBL_FACULTY,contentValues,"${FACULTY_EMAIL} = '$email'",null)
+        val UpdateQuery = db.update(TBL_FACULTY,contentValues,"$FACULTY_EMAIL = '$email'",null)
         db.close()
         return UpdateQuery
     }
@@ -260,7 +263,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME,nu
         contentValues.put(STUDENT_CLASS,adm.student_class)
 
         val email = adm.student_email
-        val UpdateQuery = db.update(TBL_STUDENT,contentValues,"${STUDENT_EMAIL} = '$email'",null)
+        val UpdateQuery = db.update(TBL_STUDENT,contentValues,"$STUDENT_EMAIL = '$email'",null)
         db.close()
         return UpdateQuery
     }

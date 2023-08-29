@@ -1,4 +1,4 @@
-package com.example.studymate
+package com.example.studymate.admin
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -6,10 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.studymate.R
+import com.example.studymate.assignment.assignment_add
+import com.example.studymate.assignment.assignment_view
+import com.example.studymate.faculty.faculty_add
+import com.example.studymate.faculty.faculty_view
+import com.example.studymate.notice.notice_add
+import com.example.studymate.notice.notice_view
+import com.example.studymate.student.student_add
+import com.example.studymate.student.student_view
 import com.google.android.material.navigation.NavigationView
 
 class Admin_panel : AppCompatActivity() {
@@ -29,7 +37,7 @@ class Admin_panel : AppCompatActivity() {
         //Navigation Drawer
         val drawerLayout : DrawerLayout = findViewById(R.id.drawerLayout)
         val navView : NavigationView = findViewById(R.id.nav_view)
-        toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
+        toggle = ActionBarDrawerToggle(this,drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -37,19 +45,19 @@ class Admin_panel : AppCompatActivity() {
             when(it.itemId){
                 R.id.admin_nav_profile -> Toast.makeText(this,"You Are On Profile",Toast.LENGTH_SHORT).show()
                 R.id.admin_nav_addfaculty -> {
-                    val faculty_add = Intent(applicationContext,faculty_add::class.java)
+                    val faculty_add = Intent(applicationContext, faculty_add::class.java)
                     startActivity(faculty_add)
                 }
                 R.id.admin_nav_addstudent -> {
-                    val student_add = Intent(applicationContext,student_add::class.java)
+                    val student_add = Intent(applicationContext, student_add::class.java)
                     startActivity(student_add)
                 }
                 R.id.admin_nav_notices -> {
-                    val notice_add = Intent(applicationContext,notice_add::class.java)
+                    val notice_add = Intent(applicationContext, notice_add::class.java)
                     startActivity(notice_add)
                 }
                 R.id.admin_nav_assignments -> {
-                    val assignment_add = Intent(applicationContext,assignment_add::class.java)
+                    val assignment_add = Intent(applicationContext, assignment_add::class.java)
                     startActivity(assignment_add)
                 }
                 R.id.admin_nav_logout -> {
@@ -64,25 +72,25 @@ class Admin_panel : AppCompatActivity() {
         //Admin Adds Faculty
         add_faculty = findViewById(R.id.admin_view_faculty)
         add_faculty.setOnClickListener{
-            startActivity(Intent(applicationContext,faculty_view::class.java))
+            startActivity(Intent(applicationContext, faculty_view::class.java))
         }
 
         //Admin Adds Student
         add_student = findViewById(R.id.admin_view_student)
         add_student.setOnClickListener{
-            startActivity(Intent(applicationContext,student_view::class.java))
+            startActivity(Intent(applicationContext, student_view::class.java))
         }
 
         //Admin Adds Notices
         add_notice = findViewById(R.id.admin_view_notice)
         add_notice.setOnClickListener{
-            startActivity(Intent(applicationContext,notice_view::class.java))
+            startActivity(Intent(applicationContext, notice_view::class.java))
         }
 
         //Admin Adds Assignments
         add_assignment = findViewById(R.id.admin_view_assignment)
         add_assignment.setOnClickListener{
-            startActivity(Intent(applicationContext,assignment_view::class.java))
+            startActivity(Intent(applicationContext, assignment_view::class.java))
         }
 
         //Admin AboutUS

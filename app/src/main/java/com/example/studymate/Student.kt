@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.studymate.student.Student_panel
 
 class Student : AppCompatActivity() {
 
@@ -35,7 +36,7 @@ class Student : AppCompatActivity() {
         student_login.setOnClickListener {
             if (validation_student())
             {
-                val Faculty_panel = Intent(applicationContext,Student_panel::class.java)
+                val Faculty_panel = Intent(applicationContext, Student_panel::class.java)
                 startActivity(Faculty_panel)
             }else{
                 Toast.makeText(this,"Something Went Wrong ⚠️", Toast.LENGTH_SHORT).show()

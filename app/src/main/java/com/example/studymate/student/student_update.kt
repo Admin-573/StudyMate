@@ -1,4 +1,4 @@
-package com.example.studymate
+package com.example.studymate.student
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.studymate.R
+import com.example.studymate.database.AdminModel
+import com.example.studymate.database.SQLiteHelper
+import com.example.studymate.faculty.FacultyAdapter
 
 class student_update : AppCompatActivity() {
     private lateinit var upd_name : EditText
@@ -16,8 +20,8 @@ class student_update : AppCompatActivity() {
     private lateinit var btn_back : Button
 
     private lateinit var sqLiteHelper: SQLiteHelper
-    private var adapter : FacultyAdapter ?= null
-    private var adm : AdminModel ?= null
+    private var adapter : FacultyAdapter?= null
+    private var adm : AdminModel?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student_update)
@@ -50,7 +54,7 @@ class student_update : AppCompatActivity() {
         if(rc > 0){
             getStudent()
             Toast.makeText(applicationContext,"Updated",Toast.LENGTH_SHORT).show()
-            startActivity(Intent(applicationContext,student_view::class.java))
+            startActivity(Intent(applicationContext, student_view::class.java))
         }else{
             Toast.makeText(applicationContext,"Error",Toast.LENGTH_SHORT).show()
         }

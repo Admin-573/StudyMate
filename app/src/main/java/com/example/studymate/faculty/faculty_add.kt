@@ -1,4 +1,4 @@
-package com.example.studymate
+package com.example.studymate.faculty
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.studymate.R
+import com.example.studymate.database.AdminModel
+import com.example.studymate.database.SQLiteHelper
 
 class faculty_add : AppCompatActivity() {
 
@@ -19,8 +22,8 @@ class faculty_add : AppCompatActivity() {
 
     private lateinit var sqLiteHelper: SQLiteHelper
     private lateinit var recyclerView: RecyclerView
-    private var adapter : FacultyAdapter ?= null
-    private var adm : AdminModel ?= null
+    private var adapter : FacultyAdapter?= null
+    private var adm : AdminModel?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +35,7 @@ class faculty_add : AppCompatActivity() {
                 addFaculty()
                 clearFaculty()
                 Toast.makeText(this,"Checkout 🎯",Toast.LENGTH_SHORT).show()
-                startActivity(Intent(applicationContext,faculty_view::class.java))
+                startActivity(Intent(applicationContext, faculty_view::class.java))
             }
         }
         btn_back.setOnClickListener {

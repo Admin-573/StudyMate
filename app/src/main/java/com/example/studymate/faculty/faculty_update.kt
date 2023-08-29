@@ -1,12 +1,14 @@
-package com.example.studymate
+package com.example.studymate.faculty
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.studymate.R
+import com.example.studymate.database.AdminModel
+import com.example.studymate.database.SQLiteHelper
 
 class faculty_update : AppCompatActivity() {
 
@@ -18,8 +20,8 @@ class faculty_update : AppCompatActivity() {
     private lateinit var btn_back : Button
 
     private lateinit var sqLiteHelper: SQLiteHelper
-    private var adapter : FacultyAdapter ?= null
-    private var adm : AdminModel ?= null
+    private var adapter : FacultyAdapter?= null
+    private var adm : AdminModel?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_faculty_update)
@@ -66,7 +68,7 @@ class faculty_update : AppCompatActivity() {
         if(rc > 0){
             getFaculty()
             Toast.makeText(applicationContext,"Update",Toast.LENGTH_SHORT).show()
-            startActivity(Intent(applicationContext,faculty_view::class.java))
+            startActivity(Intent(applicationContext, faculty_view::class.java))
         }else{
             Toast.makeText(applicationContext,"Error",Toast.LENGTH_SHORT).show()
         }

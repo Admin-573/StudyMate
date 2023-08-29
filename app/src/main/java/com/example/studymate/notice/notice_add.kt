@@ -1,4 +1,4 @@
-package com.example.studymate
+package com.example.studymate.notice
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.studymate.R
+import com.example.studymate.database.AdminModel
+import com.example.studymate.database.SQLiteHelper
 import com.google.android.material.datepicker.MaterialDatePicker
 
 class notice_add : AppCompatActivity() {
@@ -18,8 +21,8 @@ class notice_add : AppCompatActivity() {
 
     private lateinit var sqLiteHelper: SQLiteHelper
     private lateinit var recyclerView: RecyclerView
-    private var adapter : NoticeAdapter ?= null
-    private var adm : AdminModel ?= null
+    private var adapter : NoticeAdapter?= null
+    private var adm : AdminModel?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notice_add)
@@ -31,7 +34,7 @@ class notice_add : AppCompatActivity() {
             if(noticeValidation()){
                 addNotice()
                 clearNotice()
-                startActivity(Intent(applicationContext,notice_view::class.java))
+                startActivity(Intent(applicationContext, notice_view::class.java))
             }
         }
 

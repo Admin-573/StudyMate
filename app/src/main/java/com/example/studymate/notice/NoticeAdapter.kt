@@ -1,4 +1,4 @@
-package com.example.studymate
+package com.example.studymate.notice
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.studymate.FacultyAdapter.*
+import com.example.studymate.R
+import com.example.studymate.database.AdminModel
 
-class FacultyAdapter : RecyclerView.Adapter<FacultyViewHolder>() {
+class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>() {
 
     private var admList : ArrayList<AdminModel> = ArrayList()
     private var onClickItem : ((AdminModel) -> Unit) ?= null
@@ -26,15 +27,15 @@ class FacultyAdapter : RecyclerView.Adapter<FacultyViewHolder>() {
     fun setOnClickDeleteItem(callback: ((AdminModel) -> Unit)){
         this.onClickDeleteItem = callback
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)= FacultyViewHolder (
-        LayoutInflater.from(parent.context).inflate(R.layout.card_faculty_data,parent,false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)= NoticeViewHolder (
+        LayoutInflater.from(parent.context).inflate(R.layout.card_notice_data,parent,false)
     )
 
     override fun getItemCount(): Int {
         return admList.size
     }
 
-    override fun onBindViewHolder(holder: FacultyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NoticeViewHolder, position: Int) {
         val adm = admList[position]
         holder.bindView(adm)
         holder.itemView.setOnClickListener{
@@ -45,16 +46,16 @@ class FacultyAdapter : RecyclerView.Adapter<FacultyViewHolder>() {
         }
     }
 
-    class FacultyViewHolder(var view: View): RecyclerView.ViewHolder(view) {
-        private var name = view.findViewById<TextView>(R.id.faculty_view_name)
-        private var email = view.findViewById<TextView>(R.id.faculty_view_email)
-        private var sub = view.findViewById<TextView>(R.id.faculty_view_sub)
-        var btnDelete = view.findViewById<Button>(R.id.btnDeleteFaculty)
+    class NoticeViewHolder(var view: View): RecyclerView.ViewHolder(view) {
+        private var name = view.findViewById<TextView>(R.id.view_notice_name)
+        private var des = view.findViewById<TextView>(R.id.view_notice_des)
+        private var date = view.findViewById<TextView>(R.id.view_notice_date)
+        var btnDelete = view.findViewById<Button>(R.id.btnDeleteNotice)
 
         fun bindView(adm : AdminModel){
-            name.text = adm.faculty_name
-            email.text = adm.faculty_email
-            sub.text = adm.faculty_sub
+            name.text = adm.notice_name
+            des.text = adm.notice_des
+            date.text = adm.notice_date
         }
     }
 }
