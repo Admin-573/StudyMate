@@ -3,11 +3,14 @@ package com.example.studymate
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
+import androidx.activity.addCallback
 import androidx.recyclerview.widget.RecyclerView
+import com.example.studymate.admin.AdminSession
 import com.example.studymate.database.AdminModel
 import com.example.studymate.admin.Admin_panel
 import com.example.studymate.database.SQLiteHelper
@@ -21,6 +24,8 @@ class Admin : AppCompatActivity() {
     private lateinit var admin_login: Button
     private lateinit var admin_back: Button
 
+    private lateinit var adminSession: AdminSession
+
     private lateinit var sqLiteHelper: SQLiteHelper
     private lateinit var recyclerView: RecyclerView
     private var adm: AdminModel?= null
@@ -32,6 +37,8 @@ class Admin : AppCompatActivity() {
         init_call()
         sqLiteHelper = SQLiteHelper(this)
 
+        adminSession = AdminSession(this)
+
         admin_login.setOnClickListener {
             if(validation_admin()){
                 addAdmin()
@@ -40,6 +47,12 @@ class Admin : AppCompatActivity() {
         }
         admin_back.setOnClickListener {
             onBackPressed()
+        }
+
+        //if Admin is login then it'll redirected to admin_panel
+        if(adminSession.login()){
+            startActivity(Intent(applicationContext,Admin_panel::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            finish()
         }
     }
 
@@ -58,10 +71,13 @@ class Admin : AppCompatActivity() {
         val status = sqLiteHelper.InsertAdmin(adm)
         if(status > -1)
         {
-            Toast.makeText(this,"New Admin Added",Toast.LENGTH_SHORT).show()
+            adminSession.adminLogin(email,name)
+            Toast.makeText(this,"Admin Logged In",Toast.LENGTH_SHORT).show()
+            finish()
         }
         else
         {
+            adminSession.adminLogin(email,name)
             Toast.makeText(this,"Admin Founded Good To Go ~",Toast.LENGTH_SHORT).show()
         }
     }
@@ -77,16 +93,15 @@ class Admin : AppCompatActivity() {
         } else if(admin_email.length()==0){
             admin_email.setError("Email ID Required")
             return false
-        } else if(!Patterns.EMAIL_ADDRESS.matcher(admin_email.text.toString()).matches()){
-            Toast.makeText(this,"Email Format Wrong",Toast.LENGTH_SHORT).show()
-            return false
         }
         else {
-            if (admin_org_no.text.toString() == "India@123"){
-                startActivity(Intent(applicationContext,Admin_panel::class.java))
+            if (admin_org_no.text.toString() == "India@123"
+                || admin_org_no.text.toString() == "india@123"
+                || admin_org_no.text.toString() == "INDIA@123"){
+                val Admin_panel = Intent(applicationContext, Admin_panel::class.java)
+                startActivity(Admin_panel)
             } else {
                 admin_org_no.setError("Security ID Wrong")
-                return false
             }
         }
         return true
