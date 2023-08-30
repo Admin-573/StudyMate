@@ -6,7 +6,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
+import androidx.activity.addCallback
 import androidx.recyclerview.widget.RecyclerView
+import com.example.studymate.admin.AdminSession
 import com.example.studymate.database.AdminModel
 import com.example.studymate.admin.Admin_panel
 import com.example.studymate.database.SQLiteHelper
@@ -20,6 +24,8 @@ class Admin : AppCompatActivity() {
     private lateinit var admin_login: Button
     private lateinit var admin_back: Button
 
+    private lateinit var adminSession: AdminSession
+
     private lateinit var sqLiteHelper: SQLiteHelper
     private lateinit var recyclerView: RecyclerView
     private var adm: AdminModel?= null
@@ -31,6 +37,8 @@ class Admin : AppCompatActivity() {
         init_call()
         sqLiteHelper = SQLiteHelper(this)
 
+        adminSession = AdminSession(this)
+
         admin_login.setOnClickListener {
             if(validation_admin()){
                 addAdmin()
@@ -39,6 +47,12 @@ class Admin : AppCompatActivity() {
         }
         admin_back.setOnClickListener {
             onBackPressed()
+        }
+
+        //if Admin is login then it'll redirected to admin_panel
+        if(adminSession.login()){
+            startActivity(Intent(applicationContext,Admin_panel::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            finish()
         }
     }
 
@@ -57,10 +71,13 @@ class Admin : AppCompatActivity() {
         val status = sqLiteHelper.InsertAdmin(adm)
         if(status > -1)
         {
+            adminSession.adminLogin(email,name)
             Toast.makeText(this,"Admin Logged In",Toast.LENGTH_SHORT).show()
+            finish()
         }
         else
         {
+            adminSession.adminLogin(email,name)
             Toast.makeText(this,"Admin Founded Good To Go ~",Toast.LENGTH_SHORT).show()
         }
     }
@@ -78,7 +95,9 @@ class Admin : AppCompatActivity() {
             return false
         }
         else {
-            if (admin_org_no.text.toString() == "India@123"){
+            if (admin_org_no.text.toString() == "India@123"
+                || admin_org_no.text.toString() == "india@123"
+                || admin_org_no.text.toString() == "INDIA@123"){
                 val Admin_panel = Intent(applicationContext, Admin_panel::class.java)
                 startActivity(Admin_panel)
             } else {

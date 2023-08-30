@@ -5,10 +5,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.studymate.Admin
 import com.example.studymate.R
 import com.example.studymate.assignment.assignment_add
 import com.example.studymate.assignment.assignment_view
@@ -29,16 +33,33 @@ class Admin_panel : AppCompatActivity() {
     private lateinit var add_assignment : LinearLayout
     private lateinit var admin_aboutus : LinearLayout
     private lateinit var admin_contactus : LinearLayout
+
+    private lateinit var adminSession: AdminSession
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_panel)
 
+        adminSession= AdminSession(this)
+
         //Navigation Drawer
         val drawerLayout : DrawerLayout = findViewById(R.id.drawerLayout)
         val navView : NavigationView = findViewById(R.id.nav_view)
+
         toggle = ActionBarDrawerToggle(this,drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
+        val view : View = navView.getHeaderView(0)
+        val name : TextView = view.findViewById(R.id.admin_name_head)
+        val email : TextView = view.findViewById(R.id.admin_email_head)
+
+        name.setText(adminSession.sharedPreferences.getString("name",""))
+        email.setText(adminSession.sharedPreferences.getString("email",""))
+
+        //BackPressed CallBack
+        onBackPressedDispatcher.addCallback{
+            Toast.makeText(applicationContext,"User Login, back pressed 🔙",Toast.LENGTH_SHORT).show()
+        }
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         navView.setNavigationItemSelectedListener {
@@ -61,7 +82,9 @@ class Admin_panel : AppCompatActivity() {
                     startActivity(assignment_add)
                 }
                 R.id.admin_nav_logout -> {
-                    onBackPressed()
+                    adminSession.adminLogout()
+                    startActivity(Intent(applicationContext,Admin::class.java))
+                    finish()
                 }
                 R.id.admin_nav_contactUs -> Toast.makeText(this,"Contact Us",Toast.LENGTH_SHORT).show()
                 R.id.admin_nav_aboutUs -> Toast.makeText(this,"About Us",Toast.LENGTH_SHORT).show()
