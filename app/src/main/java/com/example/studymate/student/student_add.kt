@@ -3,6 +3,7 @@ package com.example.studymate.student
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -52,8 +53,11 @@ class student_add : AppCompatActivity() {
         } else if(student_email.length()==0){
             student_email.setError("Email Can't Be Empty")
             return false
-        } else if(student_password.length()==0){
+        } else if(student_password.length()==0) {
             student_password.setError("Password Required")
+            return false
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(student_email.text.toString()).matches()){
+            Toast.makeText(this,"Email Format Is Wrong !",Toast.LENGTH_SHORT).show()
             return false
         } else if(student_class.length()==0) {
             student_class.setError("Class Needed")

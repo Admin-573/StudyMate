@@ -3,6 +3,7 @@ package com.example.studymate.faculty
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -69,8 +70,11 @@ class faculty_add : AppCompatActivity() {
         if(faculty_name.length() == 0){
             faculty_name.setError("Name Required")
             return false
-        } else if(faculty_email.length()==0){
+        } else if(faculty_email.length()==0) {
             faculty_email.setError("Email Can't Be Empty")
+            return false
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(faculty_email.text.toString()).matches()){
+            Toast.makeText(this,"Email Format Wrong !",Toast.LENGTH_SHORT).show()
             return false
         } else if(faculty_password.length()==0){
             faculty_password.setError("Password Required")

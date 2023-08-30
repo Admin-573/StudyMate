@@ -115,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ubuntu"
-            android:text="Add Notices 🔔"
+            android:text="Add Notices ~"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:layout_marginTop="12sp"/>

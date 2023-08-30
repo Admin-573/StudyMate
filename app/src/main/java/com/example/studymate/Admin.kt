@@ -3,6 +3,7 @@ package com.example.studymate
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -93,8 +94,10 @@ class Admin : AppCompatActivity() {
         } else if(admin_email.length()==0){
             admin_email.setError("Email ID Required")
             return false
-        }
-        else {
+        } else if(!Patterns.EMAIL_ADDRESS.matcher(admin_email.text.toString()).matches()){
+            Toast.makeText(this,"Email Format  Wrong !",Toast.LENGTH_SHORT).show()
+            return false
+        } else {
             if (admin_org_no.text.toString() == "India@123"
                 || admin_org_no.text.toString() == "india@123"
                 || admin_org_no.text.toString() == "INDIA@123"){
