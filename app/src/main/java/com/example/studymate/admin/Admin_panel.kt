@@ -2,8 +2,11 @@ package com.example.studymate.admin
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
@@ -11,6 +14,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
@@ -20,6 +24,8 @@ import com.example.studymate.ContactUs
 import com.example.studymate.R
 import com.example.studymate.assignment.assignment_add
 import com.example.studymate.assignment.assignment_view
+import com.example.studymate.database.AdminModel
+import com.example.studymate.database.SQLiteHelper
 import com.example.studymate.faculty.faculty_add
 import com.example.studymate.faculty.faculty_view
 import com.example.studymate.notice.notice_add
@@ -27,6 +33,7 @@ import com.example.studymate.notice.notice_view
 import com.example.studymate.student.student_add
 import com.example.studymate.student.student_view
 import com.google.android.material.navigation.NavigationView
+import java.io.ByteArrayOutputStream
 
 class Admin_panel : AppCompatActivity() {
 
@@ -37,35 +44,44 @@ class Admin_panel : AppCompatActivity() {
     private lateinit var add_assignment : LinearLayout
     private lateinit var admin_aboutus : LinearLayout
     private lateinit var admin_contactus : LinearLayout
-
+    private lateinit var byteArray: ByteArray
     private lateinit var adminSession: AdminSession
+    private lateinit var  sqLiteHelper: SQLiteHelper
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_panel)
 
+        sqLiteHelper = SQLiteHelper(this)
+
         adminSession= AdminSession(this)
 
         //Navigation Drawer
         val drawerLayout : DrawerLayout = findViewById(R.id.drawerLayout)
         val navView : NavigationView = findViewById(R.id.nav_view)
+        val view : View = navView.getHeaderView(0)
 
         toggle = ActionBarDrawerToggle(this,drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
-        val view : View = navView.getHeaderView(0)
+        val image : ImageView = view.findViewById(R.id.admin_photo)
         val name : TextView = view.findViewById(R.id.admin_name_head)
         val email : TextView = view.findViewById(R.id.admin_email_head)
-        val image : ImageView = view.findViewById(R.id.admin_photo)
-        val i = registerForActivityResult(ActivityResultContracts.GetContent()){
-            uri -> image.setImageURI(uri)
-        }
+
         image.setOnClickListener {
-            i.launch("image/*")
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.setType("image/*")
+            ActivityLauncher.launch(intent)
         }
 
         name.setText(adminSession.sharedPreferences.getString("name",""))
         email.setText(adminSession.sharedPreferences.getString("email",""))
+        val adminEmail = adminSession.sharedPreferences.getString("email","")
+        if(adminEmail!=null){
+            if(sqLiteHelper.checkImage(adminEmail)){
+                //GetImage()
+            }
+        }
 
         //BackPressed CallBack
         onBackPressedDispatcher.addCallback{
@@ -143,6 +159,66 @@ class Admin_panel : AppCompatActivity() {
             startActivity(Intent(applicationContext,ContactUs::class.java))
         }
 
+    }
+
+    private fun GetImage(){
+        val adminEmail = adminSession.sharedPreferences.getString("email","")
+        val navView : NavigationView = findViewById(R.id.nav_view)
+        val view : View = navView.getHeaderView(0)
+        val image : ImageView = view.findViewById(R.id.admin_photo)
+        if(adminEmail!=null){
+            Toast.makeText(applicationContext,adminEmail.toString(),Toast.LENGTH_SHORT).show()
+            val admin = sqLiteHelper.getAdminImage(adminEmail)
+            if(admin.isNotEmpty()){
+                val byteArrayOutputStream = ByteArrayOutputStream()
+                BitmapFactory.decodeByteArray(admin[0].admin_image,0,admin[0].admin_image!!.size)
+                    .compress(Bitmap.CompressFormat.PNG,20,byteArrayOutputStream)
+                val byte = byteArrayOutputStream.toByteArray()
+                val bitmap = BitmapFactory.decodeByteArray(byte,0,byte.size)
+                image.setImageBitmap(bitmap)
+            }
+        }
+    }
+
+    private val ActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        Activityresult ->
+        if(Activityresult.resultCode == RESULT_OK){
+            val uri = Activityresult.data!!.data
+            val navView : NavigationView = findViewById(R.id.nav_view)
+            val view : View = navView.getHeaderView(0)
+            val image : ImageView = view.findViewById(R.id.admin_photo)
+            try {
+                val inputStream = contentResolver.openInputStream(uri!!)
+                val bitmap = BitmapFactory.decodeStream(inputStream)
+                val stream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.PNG,100,stream)
+                byteArray = stream.toByteArray()
+
+
+                image.setImageBitmap(bitmap)
+                inputStream!!.close()
+
+
+                val email : String  =  adminSession.sharedPreferences.getString("email","").toString()
+                Log.d("rc-mail",email)
+                val images =  byteArray
+
+                val adminModel = AdminModel(admin_email = email , admin_image = images)
+                Log.d("rc-model",adminModel.toString())
+                val ic = sqLiteHelper.updateImage(adminModel)
+                Log.d("rc-query",ic.toString())
+
+                if(ic  > -1){
+                    Toast.makeText(applicationContext,"RecordUpdate",Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(applicationContext,"Not Update",Toast.LENGTH_SHORT).show()
+                }
+
+
+            }catch (e : Exception){
+                Toast.makeText(applicationContext,e.message,Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     //Navigation Drawer OnSelect Event

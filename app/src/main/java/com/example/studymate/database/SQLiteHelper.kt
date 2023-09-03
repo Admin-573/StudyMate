@@ -5,8 +5,10 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
-import java.lang.Exception
+import android.widget.TextView
+import androidx.core.database.getBlobOrNull
 
 class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
     DATABASE_NAME,null,
@@ -19,6 +21,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
 
         //Admin Table
         private const val TBL_ADMIN = "tbl_admin"
+        private const val ADMIN_IMAGE = "admin_image"
         private const val ADMIN_NAME = "admin_name"
         private const val ADMIN_EMAIL = "admin_email"
 
@@ -51,7 +54,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
 
     override fun onCreate(p0: SQLiteDatabase?) {
         //Admin Table
-        val createTblAdmin = "CREATE TABLE $TBL_ADMIN($ADMIN_NAME TEXT,$ADMIN_EMAIL VARCHAR(128) PRIMARY KEY);"
+        val createTblAdmin = "CREATE TABLE $TBL_ADMIN($ADMIN_IMAGE BLOB,$ADMIN_NAME TEXT NOT NULL,$ADMIN_EMAIL VARCHAR(128) PRIMARY KEY);"
         p0?.execSQL(createTblAdmin)
 
         //Faculty Table
@@ -116,10 +119,56 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         contentValues.put(FACULTY_PASSWORD,adm.faculty_password)
         contentValues.put(FACULTY_SUB,adm.faculty_sub)
 
-        val insertQuery = db.insert(TBL_FACULTY,null,contentValues)
+        val insertQuery = db.insert(TBL_FACULTY, ADMIN_IMAGE,contentValues)
         db.close()
         return insertQuery
     }
+
+    fun checkImage(email : String) : Boolean{
+
+        val db = this.readableDatabase
+        val cursor:Cursor? =
+            db.rawQuery("SELECT $ADMIN_IMAGE FROM $TBL_ADMIN WHERE $ADMIN_EMAIL ='$email' ",null)
+        if(cursor?.count !!> 0){
+            return false
+        }
+        return true
+    }
+
+    fun getAdminImage(email : String) : ArrayList<AdminModel>{
+        val db  = this.readableDatabase
+        val adminImageList : ArrayList<AdminModel> = ArrayList()
+        var cursor : Cursor?
+        try{
+            cursor = db.rawQuery("SELECT $ADMIN_IMAGE FROM $TBL_ADMIN WHERE $ADMIN_EMAIL = '$email' ",null)
+        }catch (e:SQLiteException){
+           e.printStackTrace()
+            db.execSQL("SELECT $ADMIN_IMAGE FROM $TBL_ADMIN WHERE $ADMIN_EMAIL = '$email' ")
+            return adminImageList
+        }
+        if(cursor.moveToFirst()){
+            do{
+                val admin = AdminModel(
+                    admin_image = cursor.getBlob(cursor.getColumnIndex("admin_image"))
+                )
+                adminImageList.add(admin)
+            }while (cursor.moveToNext())
+        }
+        return adminImageList
+    }
+
+    fun updateImage(adm: AdminModel): Int {
+
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+
+        contentValues.put(ADMIN_IMAGE,adm.admin_image)
+        val email = adm.admin_email
+        val uploadImage = db.update(TBL_ADMIN,contentValues, "$ADMIN_EMAIL = '$email'",null)
+        db.close()
+        return  uploadImage
+    }
+
 
     //Displaying Data Of Faculty
     @SuppressLint("Range")

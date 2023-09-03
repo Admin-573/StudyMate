@@ -1,9 +1,11 @@
 package com.example.studymate.database
 
+import android.net.Uri
 import java.util.Date
 
 data class AdminModel (
     // Admin Content
+    var admin_image : ByteArray?= null,
     var admin_name : String = "",
     var admin_email : String = "",
 
