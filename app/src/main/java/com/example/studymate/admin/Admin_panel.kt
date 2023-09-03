@@ -12,7 +12,9 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.studymate.AboutUs
 import com.example.studymate.Admin
+import com.example.studymate.ContactUs
 import com.example.studymate.R
 import com.example.studymate.assignment.assignment_add
 import com.example.studymate.assignment.assignment_view
@@ -86,8 +88,12 @@ class Admin_panel : AppCompatActivity() {
                     startActivity(Intent(applicationContext,Admin::class.java))
                     finish()
                 }
-                R.id.admin_nav_contactUs -> Toast.makeText(this,"Contact Us",Toast.LENGTH_SHORT).show()
-                R.id.admin_nav_aboutUs -> Toast.makeText(this,"About Us",Toast.LENGTH_SHORT).show()
+                R.id.admin_nav_contactUs -> {
+                    startActivity(Intent(applicationContext,ContactUs::class.java))
+                }
+                R.id.admin_nav_aboutUs -> {
+                    startActivity(Intent(applicationContext,AboutUs::class.java))
+                }
             }
             true
         }
@@ -119,13 +125,13 @@ class Admin_panel : AppCompatActivity() {
         //Admin AboutUS
         admin_aboutus = findViewById(R.id.admin_about_us)
         admin_aboutus.setOnClickListener{
-            Toast.makeText(this,"Admin About US",Toast.LENGTH_SHORT).show()
+            startActivity(Intent(applicationContext,AboutUs::class.java))
         }
 
         //Admin ContactUS
         admin_contactus = findViewById(R.id.admin_contact_us)
         admin_contactus.setOnClickListener{
-            Toast.makeText(this,"Admin Contact US",Toast.LENGTH_SHORT).show()
+            startActivity(Intent(applicationContext,ContactUs::class.java))
         }
 
     }
