@@ -119,37 +119,26 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         contentValues.put(FACULTY_PASSWORD,adm.faculty_password)
         contentValues.put(FACULTY_SUB,adm.faculty_sub)
 
-        val insertQuery = db.insert(TBL_FACULTY, ADMIN_IMAGE,contentValues)
+        val insertQuery = db.insert(TBL_FACULTY,null,contentValues)
         db.close()
         return insertQuery
     }
-
-    fun checkImage(email : String) : Boolean{
-
-        val db = this.readableDatabase
-        val cursor:Cursor? =
-            db.rawQuery("SELECT COUNT(*) FROM $TBL_ADMIN WHERE $ADMIN_IMAGE IS NOT NULL AND $ADMIN_EMAIL LIKE '$email' ",null)
-        if(cursor?.count!! > 0){
-            return true
-        }
-        return false
-    }
-
-    fun getAdminImage(email : String) : ArrayList<AdminModel>{
+    fun getAdmin(email : String) : ArrayList<AdminModel>{
         val db  = this.readableDatabase
         val adminImageList : ArrayList<AdminModel> = ArrayList()
-        var cursor : Cursor?
+        val cursor : Cursor?
         try{
-            cursor = db.rawQuery("SELECT $ADMIN_IMAGE FROM $TBL_ADMIN WHERE $ADMIN_EMAIL = '$email' ",null)
+            cursor = db.rawQuery("SELECT * FROM $TBL_ADMIN WHERE $ADMIN_EMAIL = '$email' ",null)
         }catch (e:SQLiteException){
-           e.printStackTrace()
-            db.execSQL("SELECT $ADMIN_IMAGE FROM $TBL_ADMIN WHERE $ADMIN_EMAIL = '$email' ")
+            e.printStackTrace()
             return adminImageList
         }
         if(cursor.moveToFirst()){
             do{
                 val admin = AdminModel(
-                    admin_image = cursor.getBlob(cursor.getColumnIndex("admin_image"))
+                    admin_image = cursor.getBlob(cursor.getColumnIndex("admin_image")),
+                    admin_email = cursor.getString(cursor.getColumnIndex("admin_email")),
+                    admin_name = cursor.getString(cursor.getColumnIndex("admin_name"))
                 )
                 adminImageList.add(admin)
             }while (cursor.moveToNext())

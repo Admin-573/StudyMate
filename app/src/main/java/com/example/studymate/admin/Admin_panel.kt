@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -61,115 +62,128 @@ class Admin_panel : AppCompatActivity() {
         val drawerLayout : DrawerLayout = findViewById(R.id.drawerLayout)
         val navView : NavigationView = findViewById(R.id.nav_view)
         val view : View = navView.getHeaderView(0)
-
-        toggle = ActionBarDrawerToggle(this,drawerLayout, R.string.open, R.string.close)
-        drawerLayout.addDrawerListener(toggle)
-        val image : ImageView = view.findViewById(R.id.admin_photo)
         val name : TextView = view.findViewById(R.id.admin_name_head)
         val email : TextView = view.findViewById(R.id.admin_email_head)
+        val image : ImageView = view.findViewById(R.id.admin_photo)
 
-        image.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.setType("image/*")
-            ActivityLauncher.launch(intent)
-        }
-
-        name.setText(adminSession.sharedPreferences.getString("name",""))
-        email.setText(adminSession.sharedPreferences.getString("email",""))
         val adminEmail = adminSession.sharedPreferences.getString("email","")
-        if(!sqLiteHelper.checkImage(adminEmail!!)){
-            Log.d("checkUac","true")
-            Toast.makeText(applicationContext,adminEmail.toString(),Toast.LENGTH_SHORT).show()
-            val admin = sqLiteHelper.getAdminImage(adminEmail)
+
+        if(adminEmail!=null){
+            val admin = sqLiteHelper.getAdmin(adminEmail)
             if(admin.isNotEmpty()){
-                val byteArrayOutputStream = ByteArrayOutputStream()
-                BitmapFactory.decodeByteArray(admin[0].admin_image,0,admin[0].admin_image!!.size)
-                    .compress(Bitmap.CompressFormat.PNG,20,byteArrayOutputStream)
-                val byte = byteArrayOutputStream.toByteArray()
-                val bitmap = BitmapFactory.decodeByteArray(byte,0,byte.size)
-                image.setImageBitmap(bitmap)
-            }
-        }else if(sqLiteHelper.checkImage(adminEmail)) {
-            Log.d("checkUac","false")
-        }else{
-            Log.d("checkUac","not set")
-            Toast.makeText(applicationContext,"image not set",Toast.LENGTH_SHORT).show()
-        }
-        //BackPressed CallBack
-        onBackPressedDispatcher.addCallback{
-            Toast.makeText(applicationContext,"Please Logout To GoBack",Toast.LENGTH_SHORT).show()
-        }
-        toggle.syncState()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        navView.setNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.admin_nav_profile -> Toast.makeText(this,"You Are On Profile",Toast.LENGTH_SHORT).show()
-                R.id.admin_nav_addfaculty -> {
-                    val faculty_add = Intent(applicationContext, faculty_add::class.java)
-                    startActivity(faculty_add)
-                }
-                R.id.admin_nav_addstudent -> {
-                    val student_add = Intent(applicationContext, student_add::class.java)
-                    startActivity(student_add)
-                }
-                R.id.admin_nav_notices -> {
-                    val notice_add = Intent(applicationContext, notice_add::class.java)
-                    startActivity(notice_add)
-                }
-                R.id.admin_nav_assignments -> {
-                    val assignment_add = Intent(applicationContext, assignment_add::class.java)
-                    startActivity(assignment_add)
-                }
-                R.id.admin_nav_logout -> {
-                    adminSession.adminLogout()
-                    startActivity(Intent(applicationContext,Admin::class.java))
-                    finish()
-                }
-                R.id.admin_nav_contactUs -> {
-                    startActivity(Intent(applicationContext,ContactUs::class.java))
-                }
-                R.id.admin_nav_aboutUs -> {
-                    startActivity(Intent(applicationContext,AboutUs::class.java))
+                name.text = admin[0].admin_name
+                email.text = admin[0].admin_email
+                if(admin[0].admin_image!=null) {
+                    image.setImageBitmap(
+                        BitmapFactory.decodeByteArray(
+                            admin[0].admin_image,
+                            0,
+                            admin[0].admin_image!!.size
+                        )
+                    )
+                }else{
+                    image.setImageDrawable(resources.getDrawable(R.drawable.name))
                 }
             }
-            true
         }
 
-        //Admin Adds Faculty
-        add_faculty = findViewById(R.id.admin_view_faculty)
-        add_faculty.setOnClickListener{
-            startActivity(Intent(applicationContext, faculty_view::class.java))
-        }
+            toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
+            drawerLayout.addDrawerListener(toggle)
 
-        //Admin Adds Student
-        add_student = findViewById(R.id.admin_view_student)
-        add_student.setOnClickListener{
-            startActivity(Intent(applicationContext, student_view::class.java))
-        }
+            image.setOnClickListener {
+                val intent = Intent(Intent.ACTION_GET_CONTENT)
+                intent.setType("image/*")
+                ActivityLauncher.launch(intent)
+            }
 
-        //Admin Adds Notices
-        add_notice = findViewById(R.id.admin_view_notice)
-        add_notice.setOnClickListener{
-            startActivity(Intent(applicationContext, notice_view::class.java))
-        }
 
-        //Admin Adds Assignments
-        add_assignment = findViewById(R.id.admin_view_assignment)
-        add_assignment.setOnClickListener{
-            startActivity(Intent(applicationContext, assignment_view::class.java))
-        }
+            //BackPressed CallBack
+            onBackPressedDispatcher.addCallback {
+                Toast.makeText(applicationContext, "Please Logout To GoBack", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            toggle.syncState()
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            navView.setNavigationItemSelectedListener {
+                when (it.itemId) {
+                    R.id.admin_nav_profile -> Toast.makeText(
+                        this,
+                        "You Are On Profile",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-        //Admin AboutUS
-        admin_aboutus = findViewById(R.id.admin_about_us)
-        admin_aboutus.setOnClickListener{
-            startActivity(Intent(applicationContext,AboutUs::class.java))
-        }
+                    R.id.admin_nav_addfaculty -> {
+                        val faculty_add = Intent(applicationContext, faculty_add::class.java)
+                        startActivity(faculty_add)
+                    }
 
-        //Admin ContactUS
-        admin_contactus = findViewById(R.id.admin_contact_us)
-        admin_contactus.setOnClickListener{
-            startActivity(Intent(applicationContext,ContactUs::class.java))
-        }
+                    R.id.admin_nav_addstudent -> {
+                        val student_add = Intent(applicationContext, student_add::class.java)
+                        startActivity(student_add)
+                    }
+
+                    R.id.admin_nav_notices -> {
+                        val notice_add = Intent(applicationContext, notice_add::class.java)
+                        startActivity(notice_add)
+                    }
+
+                    R.id.admin_nav_assignments -> {
+                        val assignment_add = Intent(applicationContext, assignment_add::class.java)
+                        startActivity(assignment_add)
+                    }
+
+                    R.id.admin_nav_logout -> {
+                        adminSession.adminLogout()
+                        startActivity(Intent(applicationContext, Admin::class.java))
+                        finish()
+                    }
+
+                    R.id.admin_nav_contactUs -> {
+                        startActivity(Intent(applicationContext, ContactUs::class.java))
+                    }
+
+                    R.id.admin_nav_aboutUs -> {
+                        startActivity(Intent(applicationContext, AboutUs::class.java))
+                    }
+                }
+                true
+            }
+
+            //Admin Adds Faculty
+            add_faculty = findViewById(R.id.admin_view_faculty)
+            add_faculty.setOnClickListener {
+                startActivity(Intent(applicationContext, faculty_view::class.java))
+            }
+
+            //Admin Adds Student
+            add_student = findViewById(R.id.admin_view_student)
+            add_student.setOnClickListener {
+                startActivity(Intent(applicationContext, student_view::class.java))
+            }
+
+            //Admin Adds Notices
+            add_notice = findViewById(R.id.admin_view_notice)
+            add_notice.setOnClickListener {
+                startActivity(Intent(applicationContext, notice_view::class.java))
+            }
+
+            //Admin Adds Assignments
+            add_assignment = findViewById(R.id.admin_view_assignment)
+            add_assignment.setOnClickListener {
+                startActivity(Intent(applicationContext, assignment_view::class.java))
+            }
+
+            //Admin AboutUS
+            admin_aboutus = findViewById(R.id.admin_about_us)
+            admin_aboutus.setOnClickListener {
+                startActivity(Intent(applicationContext, AboutUs::class.java))
+            }
+
+            //Admin ContactUS
+            admin_contactus = findViewById(R.id.admin_contact_us)
+            admin_contactus.setOnClickListener {
+                startActivity(Intent(applicationContext, ContactUs::class.java))
+            }
 
     }
 
