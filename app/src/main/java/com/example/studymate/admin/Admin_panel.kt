@@ -60,7 +60,6 @@ class Admin_panel : AppCompatActivity() {
         val i = registerForActivityResult(ActivityResultContracts.GetContent()){
             uri -> image.setImageURI(uri)
         }
-
         image.setOnClickListener {
             i.launch("image/*")
         }
