@@ -58,7 +58,7 @@ class Admin_panel : AppCompatActivity() {
 
         //BackPressed CallBack
         onBackPressedDispatcher.addCallback{
-            Toast.makeText(applicationContext,"User Login, back pressed 🔙",Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext,"Please Logout To GoBack",Toast.LENGTH_SHORT).show()
         }
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

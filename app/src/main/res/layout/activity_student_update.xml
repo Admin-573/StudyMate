@@ -16,12 +16,20 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.107">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/ubuntu"
+            android:text="Update Student Data"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/under_dev"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="256dp"
+            android:layout_height="256dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -31,96 +39,97 @@
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/admin_upd_stud" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976"
-        android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
+            android:layout_marginBottom="8dp"
             app:placeholderText="Name...">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Admin_update_student_name"
-                android:inputType="text"
-                android:drawableLeft="@drawable/admin_profile"
-                android:drawablePadding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Update Name"/>
+                android:drawableLeft="@drawable/admin_profile"
+                android:drawablePadding="10dp"
+                android:hint="Update Name"
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
+            android:layout_marginBottom="8dp"
             app:placeholderText="you@example.com">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Admin_update_student_email"
-                android:inputType="textPersonName"
-                android:focusable="false"
-                android:drawableLeft="@drawable/email"
-                android:drawablePadding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"/>
+                android:drawableLeft="@drawable/email"
+                android:drawablePadding="10dp"
+                android:focusable="false"
+                android:hint="Email"
+                android:inputType="textPersonName" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
+            android:layout_marginBottom="8dp"
             app:passwordToggleEnabled="true"
             app:placeholderText="Password">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Admin_update_student_pass"
-                android:inputType="textPassword"
-                android:drawablePadding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Update Pass For Student"/>
+                android:drawablePadding="10dp"
+                android:hint="Update Pass For Student"
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
+            android:layout_marginBottom="16dp"
             app:placeholderText="Class">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Admin_update_student_class"
-                android:inputType="text"
-                android:drawablePadding="10dp"
-                android:drawableLeft="@drawable/admin_add_student_class"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Update Class"/>
+                android:drawableLeft="@drawable/admin_add_student_class"
+                android:drawablePadding="10dp"
+                android:hint="Update Class"
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.974">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAdmin_update_student"
@@ -133,12 +142,12 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBack"
+            style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginBottom="8dp"
-            style="@style/Widget.Material3.Button.OutlinedButton"
             android:text="Not Want To Update ?" />
 
     </LinearLayout>

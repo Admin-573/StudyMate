@@ -16,7 +16,64 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.96">
+        app:layout_constraintVertical_bias="0.974">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAdmin_add_notice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="2dp"
+            android:text="Add Notices" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBack"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="8dp"
+            android:text="Not Want To Add ?" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.095">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12sp"
+            android:fontFamily="@font/ubuntu"
+            android:text="Add Notices ~"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/under_dev"
+            android:layout_width="256dp"
+            android:layout_height="256dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/admin_add_notice" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -62,7 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Admin_add_notice_date"
@@ -70,69 +127,11 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/calendar"
                 android:drawablePadding="10dp"
-                android:hint="Enter Date"
-                android:text="Aug 27,2023"
                 android:focusable="auto"
+                android:hint="Enter Date"
                 android:inputType="none" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAdmin_add_notice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginBottom="2dp"
-            android:text="Add Notices" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBack"
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginBottom="8dp"
-            android:text="Not Want To Add ?" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.039">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/ubuntu"
-            android:text="Add Notices ~"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:layout_marginTop="12sp"/>
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/under_dev"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/admin_add_notice" />
 
     </LinearLayout>
 

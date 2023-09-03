@@ -16,7 +16,15 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.075">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ubuntu"
+            android:text="Add Faculty Here ~"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="22sp" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/under_dev"
@@ -32,13 +40,82 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/admin_add_faculty" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/ubuntu"
-            android:text="Add Faculty Here ~"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="22sp" />
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="8dp"
+            app:placeholderText="Name...">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Admin_add_faculty_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/admin_add_faculty_name"
+                android:drawablePadding="10dp"
+                android:hint="Name Of Faculty"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="8dp"
+            app:placeholderText="Email...">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Admin_add_faculty_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/email"
+                android:drawablePadding="10dp"
+                android:hint="you@example.com"
+                android:inputType="textPersonName" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="8dp"
+            app:passwordToggleEnabled="true"
+            app:placeholderText="Password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Admin_add_faculty_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:hint="Create Pass For Faculty"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="16dp"
+            app:placeholderText="Subject...">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Admin_add_faculty_sub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/admin_add_faculty_sub"
+                android:drawablePadding="10dp"
+                android:hint="Enter Subject"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -52,82 +129,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976"
         android:orientation="vertical">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            app:placeholderText="Name...">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Admin_add_faculty_name"
-                android:inputType="text"
-                android:drawableLeft="@drawable/admin_add_faculty_name"
-                android:drawablePadding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Name Of Faculty"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            app:placeholderText="Email...">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Admin_add_faculty_email"
-                android:inputType="textPersonName"
-                android:drawableLeft="@drawable/email"
-                android:drawablePadding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="you@example.com"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            app:passwordToggleEnabled="true"
-            app:placeholderText="Password">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Admin_add_faculty_pass"
-                android:inputType="textPassword"
-                android:drawablePadding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Create Pass For Faculty"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            app:placeholderText="Subject...">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Admin_add_faculty_sub"
-                android:inputType="text"
-                android:drawablePadding="10dp"
-                android:drawableLeft="@drawable/admin_add_faculty_sub"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter Subject"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAdmin_add_faculty"
