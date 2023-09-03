@@ -128,11 +128,11 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
 
         val db = this.readableDatabase
         val cursor:Cursor? =
-            db.rawQuery("SELECT $ADMIN_IMAGE FROM $TBL_ADMIN WHERE $ADMIN_EMAIL ='$email' ",null)
-        if(cursor?.count !!> 0){
-            return false
+            db.rawQuery("SELECT COUNT(*) FROM $TBL_ADMIN WHERE $ADMIN_IMAGE IS NOT NULL AND $ADMIN_EMAIL LIKE '$email' ",null)
+        if(cursor?.count!! > 0){
+            return true
         }
-        return true
+        return false
     }
 
     fun getAdminImage(email : String) : ArrayList<AdminModel>{

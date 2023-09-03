@@ -77,12 +77,24 @@ class Admin_panel : AppCompatActivity() {
         name.setText(adminSession.sharedPreferences.getString("name",""))
         email.setText(adminSession.sharedPreferences.getString("email",""))
         val adminEmail = adminSession.sharedPreferences.getString("email","")
-        if(adminEmail!=null){
-            if(sqLiteHelper.checkImage(adminEmail)){
-                //GetImage()
+        if(!sqLiteHelper.checkImage(adminEmail!!)){
+            Log.d("checkUac","true")
+            Toast.makeText(applicationContext,adminEmail.toString(),Toast.LENGTH_SHORT).show()
+            val admin = sqLiteHelper.getAdminImage(adminEmail)
+            if(admin.isNotEmpty()){
+                val byteArrayOutputStream = ByteArrayOutputStream()
+                BitmapFactory.decodeByteArray(admin[0].admin_image,0,admin[0].admin_image!!.size)
+                    .compress(Bitmap.CompressFormat.PNG,20,byteArrayOutputStream)
+                val byte = byteArrayOutputStream.toByteArray()
+                val bitmap = BitmapFactory.decodeByteArray(byte,0,byte.size)
+                image.setImageBitmap(bitmap)
             }
+        }else if(sqLiteHelper.checkImage(adminEmail)) {
+            Log.d("checkUac","false")
+        }else{
+            Log.d("checkUac","not set")
+            Toast.makeText(applicationContext,"image not set",Toast.LENGTH_SHORT).show()
         }
-
         //BackPressed CallBack
         onBackPressedDispatcher.addCallback{
             Toast.makeText(applicationContext,"Please Logout To GoBack",Toast.LENGTH_SHORT).show()
@@ -159,25 +171,6 @@ class Admin_panel : AppCompatActivity() {
             startActivity(Intent(applicationContext,ContactUs::class.java))
         }
 
-    }
-
-    private fun GetImage(){
-        val adminEmail = adminSession.sharedPreferences.getString("email","")
-        val navView : NavigationView = findViewById(R.id.nav_view)
-        val view : View = navView.getHeaderView(0)
-        val image : ImageView = view.findViewById(R.id.admin_photo)
-        if(adminEmail!=null){
-            Toast.makeText(applicationContext,adminEmail.toString(),Toast.LENGTH_SHORT).show()
-            val admin = sqLiteHelper.getAdminImage(adminEmail)
-            if(admin.isNotEmpty()){
-                val byteArrayOutputStream = ByteArrayOutputStream()
-                BitmapFactory.decodeByteArray(admin[0].admin_image,0,admin[0].admin_image!!.size)
-                    .compress(Bitmap.CompressFormat.PNG,20,byteArrayOutputStream)
-                val byte = byteArrayOutputStream.toByteArray()
-                val bitmap = BitmapFactory.decodeByteArray(byte,0,byte.size)
-                image.setImageBitmap(bitmap)
-            }
-        }
     }
 
     private val ActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
