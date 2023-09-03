@@ -79,7 +79,9 @@ class Admin_panel : AppCompatActivity() {
         val adminEmail = adminSession.sharedPreferences.getString("email","")
         if(adminEmail!=null){
             if(sqLiteHelper.checkImage(adminEmail)){
-                //GetImage()
+                GetImage()
+            }else{
+                GetImage()
             }
         }
 
