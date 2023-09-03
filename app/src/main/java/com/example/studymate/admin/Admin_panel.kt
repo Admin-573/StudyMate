@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.studymate.AboutUs
@@ -54,6 +56,14 @@ class Admin_panel : AppCompatActivity() {
         val view : View = navView.getHeaderView(0)
         val name : TextView = view.findViewById(R.id.admin_name_head)
         val email : TextView = view.findViewById(R.id.admin_email_head)
+        val image : ImageView = view.findViewById(R.id.admin_photo)
+        val i = registerForActivityResult(ActivityResultContracts.GetContent()){
+            uri -> image.setImageURI(uri)
+        }
+
+        image.setOnClickListener {
+            i.launch("image/*")
+        }
 
         name.setText(adminSession.sharedPreferences.getString("name",""))
         email.setText(adminSession.sharedPreferences.getString("email",""))

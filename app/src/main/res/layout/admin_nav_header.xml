@@ -6,10 +6,11 @@
     android:layout_marginTop="16dp"
     android:layout_marginStart="16dp">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:src="@drawable/name"
         android:layout_width="60dp"
-        android:layout_height="60dp"/>
+        android:layout_height="60dp"
+        android:id="@+id/admin_photo"/>
     
     <TextView
         android:id="@+id/admin_name_head"
