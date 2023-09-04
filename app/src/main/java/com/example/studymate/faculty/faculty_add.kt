@@ -43,7 +43,6 @@ class faculty_add : AppCompatActivity() {
         }
 
         faculty_image.setOnClickListener {
-            Toast.makeText(applicationContext,"click",Toast.LENGTH_SHORT).show()
             val  i = Intent(Intent.ACTION_GET_CONTENT)
             i.setType("image/*")
             ImageUploading.launch(i)
@@ -74,22 +73,32 @@ class faculty_add : AppCompatActivity() {
                 bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream)
                 byteArray = byteArrayOutputStream.toByteArray()
 
-                faculty_image.setImageBitmap(bitmap)
-                inputStream!!.close()
+                if(byteArray.size / 1024 < 600) {
+                    faculty_image.setImageBitmap(bitmap)
+                    inputStream!!.close()
 
 
-                btn_add_faculty.setOnClickListener {
-                    if(faculty_validation()){
-                        val faculty  = AdminModel(faculty_name = name, faculty_email = email, faculty_password = pass, faculty_sub = sub,faculty_image = byteArray)
-                        val status = sqLiteHelper.InsertFaculty(faculty)
-                        if (status > -1) {
-                            Toast.makeText(this, "Faculty Added", Toast.LENGTH_SHORT).show()
-                            clearFaculty()
-                            startActivity(Intent(applicationContext, faculty_view::class.java))
-                        } else {
-                            Toast.makeText(this, "Faculty Exists", Toast.LENGTH_SHORT).show()
+                    btn_add_faculty.setOnClickListener {
+                        if (faculty_validation()) {
+                            val faculty = AdminModel(
+                                faculty_name = name,
+                                faculty_email = email,
+                                faculty_password = pass,
+                                faculty_sub = sub,
+                                faculty_image = byteArray
+                            )
+                            val status = sqLiteHelper.InsertFaculty(faculty)
+                            if (status > -1) {
+                                Toast.makeText(this, "Faculty Added", Toast.LENGTH_SHORT).show()
+                                clearFaculty()
+                                startActivity(Intent(applicationContext, faculty_view::class.java))
+                            } else {
+                                Toast.makeText(this, "Faculty Exists", Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
+                }else{
+                    Toast.makeText(applicationContext,"Please choose image below 600K",Toast.LENGTH_SHORT).show()
                 }
             }catch (e : Exception){
                     e.printStackTrace()

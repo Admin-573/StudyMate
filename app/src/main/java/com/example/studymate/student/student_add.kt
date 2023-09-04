@@ -65,28 +65,32 @@ class student_add : AppCompatActivity() {
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
                 byteArray = byteArrayOutputStream.toByteArray()
 
-                student_image.setImageBitmap(bitmap)
-                inputStream!!.close()
+                if(byteArray.size / 1024 < 700) {
+                    student_image.setImageBitmap(bitmap)
+                    inputStream!!.close()
 
 
-                btn_add_student.setOnClickListener {
-                    if (studentValidation()) {
-                        val student = AdminModel(
-                            student_name = name,
-                            student_email = email,
-                            student_password = pass,
-                            student_class = sub,
-                            student_image = byteArray
-                        )
-                        val status = sqLiteHelper.InsertStudent(student)
-                        if (status > -1) {
-                            Toast.makeText(this, "Student Added", Toast.LENGTH_SHORT).show()
-                            clearFields()
-                            startActivity(Intent(applicationContext, student_view::class.java))
-                        } else {
-                            Toast.makeText(this, "Student Exists", Toast.LENGTH_SHORT).show()
+                    btn_add_student.setOnClickListener {
+                        if (studentValidation()) {
+                            val student = AdminModel(
+                                student_name = name,
+                                student_email = email,
+                                student_password = pass,
+                                student_class = sub,
+                                student_image = byteArray
+                            )
+                            val status = sqLiteHelper.InsertStudent(student)
+                            if (status > -1) {
+                                Toast.makeText(this, "Student Added", Toast.LENGTH_SHORT).show()
+                                clearFields()
+                                startActivity(Intent(applicationContext, student_view::class.java))
+                            } else {
+                                Toast.makeText(this, "Student Exists", Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
+                }else{
+                    Toast.makeText(applicationContext,"Choose image below 700K",Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

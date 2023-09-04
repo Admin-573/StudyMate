@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.Drawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -15,9 +13,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.addCallback
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.studymate.AboutUs
 import com.example.studymate.Admin
@@ -201,27 +199,28 @@ class Admin_panel : AppCompatActivity() {
                 bitmap.compress(Bitmap.CompressFormat.PNG,100,stream)
                 byteArray = stream.toByteArray()
 
+                if (byteArray.size / 1024 < 700){
+                    image.setImageBitmap(bitmap)
+                    inputStream!!.close()
 
-                image.setImageBitmap(bitmap)
-                inputStream!!.close()
+                    val email : String  =  adminSession.sharedPreferences.getString("email","").toString()
+                    Log.d("rc-mail",email)
+                    val images =  byteArray
 
+                    val adminModel = AdminModel(admin_email = email , admin_image = images)
+                    Log.d("rc-model",adminModel.toString())
+                    val ic = sqLiteHelper.updateImage(adminModel)
+                    Log.d("rc-query",ic.toString())
 
-                val email : String  =  adminSession.sharedPreferences.getString("email","").toString()
-                Log.d("rc-mail",email)
-                val images =  byteArray
+                    if(ic  > -1){
+                        Toast.makeText(applicationContext,"RecordUpdate",Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(applicationContext,"Not Update",Toast.LENGTH_SHORT).show()
+                    }
 
-                val adminModel = AdminModel(admin_email = email , admin_image = images)
-                Log.d("rc-model",adminModel.toString())
-                val ic = sqLiteHelper.updateImage(adminModel)
-                Log.d("rc-query",ic.toString())
-
-                if(ic  > -1){
-                    Toast.makeText(applicationContext,"RecordUpdate",Toast.LENGTH_SHORT).show()
                 }else{
-                    Toast.makeText(applicationContext,"Not Update",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"Please choose image below 500K",Toast.LENGTH_SHORT).show()
                 }
-
-
             }catch (e : Exception){
                 Toast.makeText(applicationContext,e.message,Toast.LENGTH_SHORT).show()
             }
