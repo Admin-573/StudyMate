@@ -7,7 +7,7 @@
     android:layout_marginStart="16dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:src="@drawable/name"
+        android:src="@drawable/add_img"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:id="@+id/admin_photo"/>
@@ -19,6 +19,7 @@
         android:textSize="24sp"
         android:fontFamily="@font/ubuntu"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -27,6 +28,7 @@
         android:text="Admin@gmail.com"
         android:paddingTop="8dp"
         android:textSize="18sp"
+        android:textColor="@color/black"
         android:fontFamily="@font/ubuntu"
         android:textStyle="normal"
         android:layout_width="wrap_content"
