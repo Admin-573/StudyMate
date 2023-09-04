@@ -72,7 +72,7 @@ class faculty_add : AppCompatActivity() {
                 val byteArrayOutputStream = ByteArrayOutputStream()
                 bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream)
                 byteArray = byteArrayOutputStream.toByteArray()
-
+                //size validation
                 if(byteArray.size / 1024 < 600) {
                     faculty_image.setImageBitmap(bitmap)
                     inputStream!!.close()

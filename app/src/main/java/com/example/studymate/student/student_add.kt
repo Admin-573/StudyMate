@@ -64,7 +64,7 @@ class student_add : AppCompatActivity() {
                 val byteArrayOutputStream = ByteArrayOutputStream()
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
                 byteArray = byteArrayOutputStream.toByteArray()
-
+                //size validation
                 if(byteArray.size / 1024 < 700) {
                     student_image.setImageBitmap(bitmap)
                     inputStream!!.close()

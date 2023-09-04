@@ -198,7 +198,7 @@ class Admin_panel : AppCompatActivity() {
                 val stream = ByteArrayOutputStream()
                 bitmap.compress(Bitmap.CompressFormat.PNG,100,stream)
                 byteArray = stream.toByteArray()
-
+                //size validation
                 if (byteArray.size / 1024 < 700){
                     image.setImageBitmap(bitmap)
                     inputStream!!.close()
