@@ -30,7 +30,7 @@
             android:id="@+id/faculty_image"
             android:layout_width="92dp"
             android:layout_height="92dp"
-            android:src="@drawable/name"
+            android:src="@drawable/add_img"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

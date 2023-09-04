@@ -79,11 +79,11 @@ class faculty_add : AppCompatActivity() {
             Log.d("icmain",faculty.faculty_id.toString())
             Log.d("icmain",faculty.faculty_image.toString())
 
-            Toast.makeText(applicationContext,"Faculty added successfully",Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext,"Faculty Added Successfully",Toast.LENGTH_SHORT).show()
             clearFaculty()
         }else{
             Log.d("icmain",addFacultyRecord.toString())
-            Toast.makeText(applicationContext,"Cannot be add faculty",Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext,"Faculty Exists",Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -118,7 +118,7 @@ class faculty_add : AppCompatActivity() {
                             ).show()
                         }
                 }else{
-                    Toast.makeText(this, "Input Stream Null", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "Input Stream Null", Toast.LENGTH_SHORT).show()
                 }
             }catch (e : Exception){
                     e.printStackTrace()
