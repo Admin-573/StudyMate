@@ -1,9 +1,11 @@
 package com.example.studymate.student
 
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.studymate.R
@@ -50,12 +52,16 @@ class StudentAdapter : RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() 
         private var name = view.findViewById<TextView>(R.id.student_view_name)
         private var email = view.findViewById<TextView>(R.id.student_view_email)
         private var sub = view.findViewById<TextView>(R.id.student_view_sub)
+        private var image = view.findViewById<ImageView>(R.id.student_view_image)
         var btnDelete = view.findViewById<Button>(R.id.btnDeleteStudent)
 
         fun bindView(adm : AdminModel){
             name.text = adm.student_name
             email.text = adm.student_email
             sub.text = adm.student_class
+            if (adm.student_image!=null){
+                image.setImageBitmap(BitmapFactory.decodeByteArray(adm.student_image,0,adm.student_image!!.size))
+            }
         }
     }
 }
