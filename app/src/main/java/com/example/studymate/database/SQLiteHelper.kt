@@ -25,6 +25,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
 
         //Faculty Table
         private const val TBL_FACULTY = "tbl_faculty"
+        private const val FACULTY_ID = "faculty_id"
         private const val FACULTY_IMAGE = "faculty_image"
         private const val FACULTY_NAME = "faculty_name"
         private const val FACULTY_EMAIL = "faculty_email"
@@ -33,6 +34,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
 
         //Student Table
         private const val TBL_STUDENT = "tbl_student"
+        private const val STUDENT_ID = "student_id"
         private const val STUDENT_IMAGE = "student_image"
         private const val STUDENT_NAME = "student_name"
         private const val STUDENT_EMAIL = "student_email"
@@ -58,11 +60,11 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         p0?.execSQL(createTblAdmin)
 
         //Faculty Table
-        val createTblFaculty = "CREATE TABLE $TBL_FACULTY($FACULTY_IMAGE BLOB,$FACULTY_NAME TEXT,$FACULTY_EMAIL VARCHAR(128) PRIMARY KEY,$FACULTY_PASSWORD TEXT,$FACULTY_SUB VARCHAR(256));"
+        val createTblFaculty = "CREATE TABLE $TBL_FACULTY($FACULTY_ID INT PRIMARY KEY,$FACULTY_IMAGE BLOB,$FACULTY_NAME TEXT,$FACULTY_EMAIL VARCHAR(128) UNIQUE NOT NULL,$FACULTY_PASSWORD TEXT,$FACULTY_SUB VARCHAR(256));"
         p0?.execSQL(createTblFaculty)
 
         //Student Table
-        val createTblStudent = "CREATE TABLE $TBL_STUDENT($STUDENT_IMAGE BLOB,$STUDENT_NAME TEXT,$STUDENT_EMAIL VARCHAR(128) PRIMARY KEY,$STUDENT_PASSWORD TEXT,$STUDENT_CLASS VARCHAR(256));"
+        val createTblStudent = "CREATE TABLE $TBL_STUDENT($STUDENT_ID INT PRIMARY KEY , $STUDENT_IMAGE BLOB,$STUDENT_NAME TEXT,$STUDENT_EMAIL VARCHAR(128) UNIQUE NOT NULL,$STUDENT_PASSWORD TEXT,$STUDENT_CLASS VARCHAR(256));"
         p0?.execSQL(createTblStudent)
 
         //Notice Table
@@ -114,6 +116,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         val db = this.writableDatabase
 
         val contentValues = ContentValues()
+        contentValues.put(FACULTY_ID,adm.faculty_id)
         contentValues.put(FACULTY_IMAGE,adm.faculty_image)
         contentValues.put(FACULTY_NAME,adm.faculty_name)
         contentValues.put(FACULTY_EMAIL,adm.faculty_email)
@@ -124,6 +127,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         db.close()
         return insertQuery
     }
+
     fun getAdmin(email : String) : ArrayList<AdminModel>{
         val db  = this.readableDatabase
         val adminImageList : ArrayList<AdminModel> = ArrayList()
@@ -232,6 +236,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         val db = this.writableDatabase
 
         val contentValues = ContentValues()
+        contentValues.put(STUDENT_ID,adm.student_id)
         contentValues.put(STUDENT_IMAGE,adm.student_image)
         contentValues.put(STUDENT_NAME,adm.student_name)
         contentValues.put(STUDENT_EMAIL,adm.student_email)

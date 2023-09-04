@@ -28,6 +28,8 @@ class student_add : AppCompatActivity() {
     private lateinit var btn_add_student : Button
     private lateinit var btnBack : Button
 
+    private val STUD_ID : Int = (2200000..2300000).random()
+
     private lateinit var sqLiteHelper: SQLiteHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,12 +43,43 @@ class student_add : AppCompatActivity() {
             onBackPressed()
         }
 
+        btn_add_student.setOnClickListener {
+            if(studentValidation()){
+                addStudent()
+            }
+        }
+
         student_image.setOnClickListener {
             val  i = Intent(Intent.ACTION_GET_CONTENT)
             i.setType("image/*")
             ImageUploading.launch(i)
         }
 
+    }
+
+    private fun addStudent() {
+        val name = student_name.text.toString()
+        val email = student_email.text.toString()
+        val pass = student_password.text.toString()
+        val sub = student_class.text.toString()
+
+        val student = AdminModel(
+            student_id = STUD_ID,
+            student_image = byteArray,
+            student_name = name,
+            student_email = email,
+            student_password = pass,
+            student_class = sub
+        )
+
+        val studentAdding = sqLiteHelper.InsertStudent(student)
+
+        if(studentAdding > -1){
+            Toast.makeText(applicationContext,"Student added successfully",Toast.LENGTH_SHORT).show()
+            clearFields()
+        }else{
+            Toast.makeText(applicationContext,"Cannot be add student",Toast.LENGTH_SHORT).show()
+        }
     }
 
     private val ImageUploading = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -68,28 +101,6 @@ class student_add : AppCompatActivity() {
                 if(byteArray.size / 1024 < 700) {
                     student_image.setImageBitmap(bitmap)
                     inputStream!!.close()
-
-
-                    btn_add_student.setOnClickListener {
-                        if (studentValidation()) {
-                            val student = AdminModel(
-                                student_name = name,
-                                student_email = email,
-                                student_password = pass,
-                                student_class = sub,
-                                student_image = byteArray
-                            )
-                            val status = sqLiteHelper.InsertStudent(student)
-                            if (status > -1) {
-                                Toast.makeText(this, "Student Added", Toast.LENGTH_SHORT).show()
-                                clearFields()
-                                byteArray = ByteArray(0)
-                                startActivity(Intent(applicationContext, student_view::class.java))
-                            } else {
-                                Toast.makeText(this, "Can not add student ", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
                 }else{
                     Toast.makeText(applicationContext,"Choose image below 700K",Toast.LENGTH_SHORT).show()
                 }

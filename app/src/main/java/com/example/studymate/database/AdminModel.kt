@@ -7,6 +7,7 @@ data class AdminModel (
     var admin_email : String = "",
 
     // Faculty Content
+    var faculty_id : Int? = null,
     var faculty_image : ByteArray? = null,
     var faculty_name : String = "",
     var faculty_email : String = "",
@@ -14,6 +15,7 @@ data class AdminModel (
     var faculty_sub : String = "",
 
     // Student Content
+    var student_id : Int? = null,
     var student_image : ByteArray? = null,
     var student_name : String = "",
     var student_email : String = "",
