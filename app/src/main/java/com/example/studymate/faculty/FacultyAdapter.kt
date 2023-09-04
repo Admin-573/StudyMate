@@ -1,14 +1,16 @@
 package com.example.studymate.faculty
 
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.studymate.R
-import com.example.studymate.faculty.FacultyAdapter.*
 import com.example.studymate.database.AdminModel
+import com.example.studymate.faculty.FacultyAdapter.FacultyViewHolder
 
 class FacultyAdapter : RecyclerView.Adapter<FacultyViewHolder>() {
 
@@ -51,12 +53,22 @@ class FacultyAdapter : RecyclerView.Adapter<FacultyViewHolder>() {
         private var name = view.findViewById<TextView>(R.id.faculty_view_name)
         private var email = view.findViewById<TextView>(R.id.faculty_view_email)
         private var sub = view.findViewById<TextView>(R.id.faculty_view_sub)
+        private var image = view .findViewById<ImageView>(R.id.faculty_view_image)
         var btnDelete = view.findViewById<Button>(R.id.btnDeleteFaculty)
 
         fun bindView(adm : AdminModel){
             name.text = adm.faculty_name
             email.text = adm.faculty_email
             sub.text = adm.faculty_sub
+            if(adm.faculty_image!=null) {
+                image.setImageBitmap(
+                    BitmapFactory.decodeByteArray(
+                        adm.faculty_image,
+                        0,
+                        adm.faculty_image!!.size
+                    )
+                )
+            }
         }
     }
 }

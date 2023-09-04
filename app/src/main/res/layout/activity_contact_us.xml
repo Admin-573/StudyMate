@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".student.student_add">
+    tools:context=".ContactUs">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,138 +16,115 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.031">
+        app:layout_constraintVertical_bias="0.061">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ubuntu"
-            android:text="Add Student Here ~"
+            android:text="Love To Hear From You 👋"
+
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="22sp" />
+            android:textStyle="bold" />
 
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/student_image"
-            android:layout_width="92dp"
-            android:layout_height="92dp"
-            android:src="@drawable/name"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="52dp"
-            android:layout_marginBottom="32dp"/>
-
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/under_dev"
+            android:layout_width="256dp"
+            android:layout_height="256dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/admin_contactus" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
+            android:layout_marginBottom="8dp"
             app:placeholderText="Name...">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Admin_add_Student_name"
-                android:inputType="text"
-                android:drawableLeft="@drawable/admin_profile"
-                android:drawablePadding="10dp"
+                android:id="@+id/name_contact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Name Of Student"/>
+                android:drawableLeft="@drawable/name"
+                android:drawablePadding="10dp"
+                android:hint="Enter Name"
+                android:inputType="textPersonName" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
+            android:layout_marginBottom="8dp"
             app:placeholderText="you@example.com">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Admin_add_student_email"
-                android:inputType="textPersonName"
+                android:id="@+id/email_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/email"
                 android:drawablePadding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Email Of Student"/>
+                android:hint="Enter Your Email"
+                android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
             android:layout_marginBottom="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            app:passwordToggleEnabled="true"
-            app:placeholderText="Password">
+            app:placeholderText="Description...">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Admin_add_student_pass"
-                android:inputType="textPassword"
-                android:drawablePadding="10dp"
+                android:id="@+id/des_contact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Create Pass For Student"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            app:placeholderText="Division-RollNo">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Admin_add_student_class"
-                android:inputType="text"
+                android:drawableLeft="@drawable/description"
                 android:drawablePadding="10dp"
-                android:drawableLeft="@drawable/admin_add_student_class"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter Class"/>
+                android:hint="Enter Description"
+                android:maxLines="2"
+                android:inputType="textMultiLine" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.974">
+        app:layout_constraintVertical_bias="0.976">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAdmin_add_student"
+            android:id="@+id/contact_us"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginBottom="2dp"
-            android:text="Add Student" />
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:text="Just Send" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBack"
+            android:id="@+id/not_contact_us"
             style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
             android:layout_marginBottom="8dp"
-            android:text="Not Want To Add ?" />
+            android:text="Back To Home" />
 
     </LinearLayout>
 
