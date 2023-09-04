@@ -83,9 +83,10 @@ class student_add : AppCompatActivity() {
                             if (status > -1) {
                                 Toast.makeText(this, "Student Added", Toast.LENGTH_SHORT).show()
                                 clearFields()
+                                byteArray = ByteArray(0)
                                 startActivity(Intent(applicationContext, student_view::class.java))
                             } else {
-                                Toast.makeText(this, "Student Exists", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Can not add student ", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
@@ -113,6 +114,9 @@ class student_add : AppCompatActivity() {
             return false
         } else if(student_class.length()==0) {
             student_class.setError("Class Needed")
+            return false
+        }else if(student_image.drawable == resources.getDrawable(R.drawable.name)){
+            Toast.makeText(applicationContext,"Upload image",Toast.LENGTH_SHORT).show()
             return false
         }
         return true

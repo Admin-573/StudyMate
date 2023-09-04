@@ -207,7 +207,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         val contentValues = ContentValues()
         contentValues.put(FACULTY_EMAIL,email)
 
-        val DeleteQuery = db.delete(TBL_FACULTY,"faculty_email=$FACULTY_EMAIL",null)
+        val DeleteQuery = db.delete(TBL_FACULTY, "$FACULTY_EMAIL = '$email' " ,null)
         db.close()
         return DeleteQuery
     }
@@ -289,7 +289,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         val contentValues = ContentValues()
         contentValues.put(STUDENT_EMAIL,email)
 
-        val DeleteQuery = db.delete(TBL_STUDENT,"student_email=$STUDENT_EMAIL",null)
+        val DeleteQuery = db.delete(TBL_STUDENT,"$STUDENT_EMAIL = '$email' ",null)
         db.close()
         return DeleteQuery
     }

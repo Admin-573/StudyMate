@@ -93,7 +93,7 @@ class faculty_add : AppCompatActivity() {
                                 clearFaculty()
                                 startActivity(Intent(applicationContext, faculty_view::class.java))
                             } else {
-                                Toast.makeText(this, "Faculty Exists", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Cannot add faculty", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
@@ -121,6 +121,9 @@ class faculty_add : AppCompatActivity() {
             return false
         } else if(faculty_sub.length()==0) {
             faculty_sub.setError("Subject Needed")
+            return false
+        }else if(faculty_image.drawable == resources.getDrawable(R.drawable.name)){
+            Toast.makeText(applicationContext,"Upload image",Toast.LENGTH_SHORT).show()
             return false
         }
         return true
