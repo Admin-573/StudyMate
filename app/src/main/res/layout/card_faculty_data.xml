@@ -16,7 +16,7 @@
         android:layout_height="64dp"
         android:src="@drawable/name"
         android:layout_gravity="center"
-        android:layout_marginEnd="7dp"/>
+        android:layout_marginEnd="8dp"/>
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -24,14 +24,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp"
             android:id="@+id/faculty_view_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
             android:fontFamily="@font/ubuntu"
             android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
             tools:text="Name" />
 
         <TextView
@@ -39,14 +39,13 @@
             android:layout_marginBottom="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
+            android:textSize="14dp"
             android:textColor="@color/black"
             android:fontFamily="@font/ubuntu"
             tools:text="Email"/>
 
         <TextView
             android:id="@+id/faculty_view_sub"
-            android:layout_marginBottom="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16dp"
