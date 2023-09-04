@@ -44,7 +44,6 @@ class faculty_add : AppCompatActivity() {
         }
 
         btn_add_faculty.setOnClickListener {
-            Toast.makeText(applicationContext, "Click Bro", Toast.LENGTH_SHORT).show()
             if(faculty_validation()){
                 addFaculty()
             }
