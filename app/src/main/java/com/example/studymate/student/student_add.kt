@@ -77,6 +77,7 @@ class student_add : AppCompatActivity() {
         if(studentAdding > -1){
             Toast.makeText(applicationContext,"Student added successfully",Toast.LENGTH_SHORT).show()
             clearFields()
+            finish()
         }else{
             Toast.makeText(applicationContext,"Cannot be add student",Toast.LENGTH_SHORT).show()
         }

@@ -82,6 +82,7 @@ class faculty_add : AppCompatActivity() {
 
             Toast.makeText(applicationContext,"Faculty Added Successfully",Toast.LENGTH_SHORT).show()
             clearFaculty()
+            finish()
         }else{
             Log.d("icmain",addFacultyRecord.toString())
             Toast.makeText(applicationContext,"Faculty Exists",Toast.LENGTH_SHORT).show()
