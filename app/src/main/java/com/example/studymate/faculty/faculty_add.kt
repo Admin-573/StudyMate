@@ -148,9 +148,9 @@ class faculty_add : AppCompatActivity() {
             return false
         }else if(!faculty_image.isSelected){
             Toast.makeText(applicationContext,"Please Upload image !",Toast.LENGTH_SHORT).show()
-            return false
+            return true
         }
-        return true
+        return false
     }
 
     private fun initView() {
