@@ -80,7 +80,7 @@ class Admin_panel : AppCompatActivity() {
                         )
                     )
                 }else{
-                    image.setImageDrawable(resources.getDrawable(R.drawable.name))
+                    image.setImageDrawable(resources.getDrawable(R.drawable.add_img))
                 }
             }
         }
