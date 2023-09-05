@@ -77,6 +77,7 @@ class student_add : AppCompatActivity() {
         if(studentAdding > -1){
             Toast.makeText(applicationContext,"Student added successfully",Toast.LENGTH_SHORT).show()
             clearFields()
+            finish()
         }else{
             Toast.makeText(applicationContext,"Cannot be add student",Toast.LENGTH_SHORT).show()
         }
@@ -138,7 +139,7 @@ class student_add : AppCompatActivity() {
         student_password.setText("")
         student_class.setText("")
         student_name.requestFocus()
-        student_image.setImageDrawable(resources.getDrawable(R.drawable.name))
+        student_image.setImageDrawable(resources.getDrawable(R.drawable.add_img))
     }
 
     private fun initView() {
