@@ -30,7 +30,7 @@ class assignment_view : AppCompatActivity() {
         }
 
         adapter?.setOnClickItem{
-            Toast.makeText(this,it.assignment_name,Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Submit On : ${it.assignment_sdate}",Toast.LENGTH_SHORT).show()
         }
     }
 
