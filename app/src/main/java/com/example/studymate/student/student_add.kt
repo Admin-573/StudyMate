@@ -126,7 +126,7 @@ class student_add : AppCompatActivity() {
         } else if(student_class.length()==0) {
             student_class.setError("Class Needed")
             return false
-        }else if(student_image.drawable == resources.getDrawable(R.drawable.name)){
+        }else if(student_image.drawable == resources.getDrawable(R.drawable.add_img)){
             Toast.makeText(applicationContext,"Upload image",Toast.LENGTH_SHORT).show()
             return false
         }
@@ -138,7 +138,7 @@ class student_add : AppCompatActivity() {
         student_password.setText("")
         student_class.setText("")
         student_name.requestFocus()
-        student_image.setImageDrawable(resources.getDrawable(R.drawable.name))
+        student_image.setImageDrawable(resources.getDrawable(R.drawable.add_img))
     }
 
     private fun initView() {

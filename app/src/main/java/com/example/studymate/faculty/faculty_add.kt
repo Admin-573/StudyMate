@@ -1,5 +1,6 @@
 package com.example.studymate.faculty
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -93,9 +94,10 @@ class faculty_add : AppCompatActivity() {
         faculty_password.setText("")
         faculty_sub.setText("")
         faculty_name.requestFocus()
-        faculty_image.setImageDrawable(resources.getDrawable(R.drawable.name))
+        faculty_image.setImageDrawable(resources.getDrawable(R.drawable.add_img))
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private val ImageUploading = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
 
         rc -> if(rc.resultCode == RESULT_OK){
@@ -142,7 +144,7 @@ class faculty_add : AppCompatActivity() {
         } else if(faculty_sub.length()==0) {
             faculty_sub.setError("Subject Needed")
             return false
-        }else if(faculty_image.drawable == resources.getDrawable(R.drawable.name)){
+        }else if(faculty_image.drawable == resources.getDrawable(R.drawable.add_img)){
             Toast.makeText(applicationContext,"Upload image",Toast.LENGTH_SHORT).show()
             return false
         }
