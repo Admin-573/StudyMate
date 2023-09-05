@@ -51,7 +51,7 @@
             android:textSize="16dp"
             android:textColor="@color/black"
             android:fontFamily="@font/ubuntu"
-            tools:text="Subject"/>
+            tools:text="Standard"/>
 
     </LinearLayout>
 

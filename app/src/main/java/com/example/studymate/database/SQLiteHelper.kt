@@ -253,7 +253,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
     fun getAllStudent() : ArrayList<AdminModel>
     {
         val admList : ArrayList<AdminModel> = ArrayList()
-        val selectQuery = "SELECT * FROM $TBL_STUDENT"
+        val selectQuery = "SELECT * FROM $TBL_STUDENT ORDER BY $STUDENT_CLASS"
         val db = this.writableDatabase
 
         val cursor : Cursor?
