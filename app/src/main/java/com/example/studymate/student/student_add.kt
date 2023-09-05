@@ -127,8 +127,8 @@ class student_add : AppCompatActivity() {
         } else if(student_class.length()==0) {
             student_class.setError("Class Needed")
             return false
-        }else if(student_image.drawable == resources.getDrawable(R.drawable.add_img)){
-            Toast.makeText(applicationContext,"Upload image",Toast.LENGTH_SHORT).show()
+        }else if(!student_image.isSelected){
+            Toast.makeText(applicationContext,"Please Upload image !",Toast.LENGTH_SHORT).show()
             return false
         }
         return true

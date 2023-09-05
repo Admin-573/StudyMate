@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -145,8 +146,8 @@ class faculty_add : AppCompatActivity() {
         } else if(faculty_sub.length()==0) {
             faculty_sub.setError("Subject Needed")
             return false
-        }else if(faculty_image.drawable == resources.getDrawable(R.drawable.add_img)){
-            Toast.makeText(applicationContext,"Upload image",Toast.LENGTH_SHORT).show()
+        }else if(!faculty_image.isSelected){
+            Toast.makeText(applicationContext,"Please Upload image !",Toast.LENGTH_SHORT).show()
             return false
         }
         return true
