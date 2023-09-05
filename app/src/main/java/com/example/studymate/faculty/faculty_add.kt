@@ -40,13 +40,14 @@ class faculty_add : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_faculty_add)
         initView()
+        faculty_image.isEnabled = false
         sqLiteHelper = SQLiteHelper(this)
         btn_back.setOnClickListener {
             onBackPressed()
         }
 
         btn_add_faculty.setOnClickListener {
-            if(faculty_validation()){
+            if(faculty_validation()) {
                 addFaculty()
             }
         }
@@ -146,11 +147,12 @@ class faculty_add : AppCompatActivity() {
         } else if(faculty_sub.length()==0) {
             faculty_sub.setError("Subject Needed")
             return false
-        }else if(!faculty_image.isSelected){
-            Toast.makeText(applicationContext,"Please Upload image !",Toast.LENGTH_SHORT).show()
-            return true
+        }else if(faculty_image.isEnabled == false){
+            Toast.makeText(this, "Please Upload image", Toast.LENGTH_SHORT).show()
+            faculty_image.isEnabled = true
+            return false
         }
-        return false
+        return true
     }
 
     private fun initView() {
