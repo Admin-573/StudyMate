@@ -132,7 +132,11 @@ class faculty_add : AppCompatActivity() {
     }
     //don't panic if u can't see a validation
     private fun faculty_validation(): Boolean {
-        if(faculty_name.length() == 0){
+        if(faculty_image.isEnabled == false){
+            Toast.makeText(this, "Please Upload image", Toast.LENGTH_SHORT).show()
+            faculty_image.isEnabled = true
+            return false
+        }else if(faculty_name.length() == 0){
             faculty_name.setError("Name Required")
             return false
         } else if(faculty_email.length()==0) {
@@ -146,10 +150,6 @@ class faculty_add : AppCompatActivity() {
             return false
         } else if(faculty_sub.length()==0) {
             faculty_sub.setError("Subject Needed")
-            return false
-        }else if(faculty_image.isEnabled == false){
-            Toast.makeText(this, "Please Upload image", Toast.LENGTH_SHORT).show()
-            faculty_image.isEnabled = true
             return false
         }
         return true

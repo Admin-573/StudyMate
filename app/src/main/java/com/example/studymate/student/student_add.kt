@@ -37,6 +37,7 @@ class student_add : AppCompatActivity() {
         setContentView(R.layout.activity_student_add)
 
         initView()
+        student_image.isEnabled = false
         sqLiteHelper = SQLiteHelper(this)
 
         btnBack.setOnClickListener {
@@ -112,7 +113,11 @@ class student_add : AppCompatActivity() {
     }
 
     private fun studentValidation(): Boolean {
-        if(student_name.length() == 0){
+        if(student_image.isEnabled == false){
+            Toast.makeText(this, "Please Upload image", Toast.LENGTH_SHORT).show()
+            student_image.isEnabled = true
+            return false
+        }else if(student_name.length() == 0){
             student_name.setError("Name Required")
             return false
         } else if(student_email.length()==0){
@@ -126,9 +131,6 @@ class student_add : AppCompatActivity() {
             return false
         } else if(student_class.length()==0) {
             student_class.setError("Class Needed")
-            return false
-        }else if(!student_image.isSelected){
-            Toast.makeText(applicationContext,"Please Upload image !",Toast.LENGTH_SHORT).show()
             return false
         }
         return true
