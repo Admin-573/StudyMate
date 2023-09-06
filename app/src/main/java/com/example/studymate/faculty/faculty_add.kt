@@ -61,10 +61,10 @@ class faculty_add : AppCompatActivity() {
 
     private fun addFaculty() {
 
-        val name = faculty_name.text.toString()
-        val email = faculty_email.text.toString()
-        val pass = faculty_password.text.toString()
-        val sub = faculty_sub.text.toString()
+        val name = faculty_name.text.toString().uppercase()
+        val email = faculty_email.text.toString().uppercase()
+        val pass = faculty_password.text.toString().uppercase()
+        val sub = faculty_sub.text.toString().uppercase()
 
         val faculty = AdminModel(
             faculty_id = FAC_ID,
