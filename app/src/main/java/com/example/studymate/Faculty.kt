@@ -30,14 +30,14 @@ class Faculty : AppCompatActivity() {
 
         btnNext.setOnClickListener {
             if (validation_faculty()){
-                val faculty = sqLiteHelper.isFaculty(email.text.toString().uppercase())
+                val faculty = sqLiteHelper.isFaculty(email.text.toString())
                 if(faculty.isNotEmpty()){
                     Toast.makeText(this,"Faculty",Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(applicationContext,Student::class.java).putExtra("faculty_email", email.text.toString().uppercase()))
-                }else if(sqLiteHelper.isStudent(email.text.toString().uppercase()).isNotEmpty()){
+                    startActivity(Intent(applicationContext,Student::class.java).putExtra("faculty_email", email.text.toString()))
+                }else if(sqLiteHelper.isStudent(email.text.toString()).isNotEmpty()){
                     Toast.makeText(this,"Student",Toast.LENGTH_SHORT).show()
                     startActivity(Intent(applicationContext,Student::class.java).putExtra("student_email",
-                        email.text.toString().uppercase()))
+                        email.text.toString()))
                 }else{
                     Toast.makeText(this,"User not found ",Toast.LENGTH_SHORT).show()
                 }

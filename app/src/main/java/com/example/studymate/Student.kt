@@ -51,7 +51,7 @@ class Student : AppCompatActivity() {
             if (validation_student()) {
                 val valFac = sqLiteHelper.chkPasswdFaculty(id.toInt())
                 if (valFac.isNotEmpty()) {
-                    if (userPasswd.text.toString().uppercase() == valFac[0].faculty_password) {
+                    if (userPasswd.text.toString() == valFac[0].faculty_password) {
                         showToast("Login Successfully !")
                         startActivity(Intent(applicationContext, Faculty_panel::class.java))
                         userId.text.clear()
@@ -60,7 +60,7 @@ class Student : AppCompatActivity() {
                         showToast("Incorrect Password !")
                     }
                 }else if (sqLiteHelper.chkPasswdStudent(id.toInt()).isNotEmpty()) {
-                    if (userPasswd.text.toString().uppercase() == sqLiteHelper.chkPasswdStudent(id.toInt())[0].student_password) {
+                    if (userPasswd.text.toString() == sqLiteHelper.chkPasswdStudent(id.toInt())[0].student_password) {
                         showToast("Login Successfully !")
                         startActivity(Intent(applicationContext, Student_panel::class.java))
                         userId.text.clear()
