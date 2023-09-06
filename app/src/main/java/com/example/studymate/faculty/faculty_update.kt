@@ -72,7 +72,7 @@ class faculty_update : AppCompatActivity() {
     }
 
     private fun updateFaculty() {
-        val faculty = AdminModel( faculty_id = upd_id.text.toString().toInt(),faculty_name = upd_name.text.toString() , faculty_email = upd_email.text.toString(), faculty_sub = upd_sub.text.toString(), faculty_password = upd_password.text.toString())
+        val faculty = AdminModel( faculty_id = upd_id.text.toString().toInt(),faculty_name = upd_name.text.toString().uppercase() , faculty_email = upd_email.text.toString().uppercase(), faculty_sub = upd_sub.text.toString().uppercase(), faculty_password = upd_password.text.toString().uppercase())
         val rc =  sqLiteHelper.updateFacultyById(faculty)
         if(rc > 0){
             getFaculty()
