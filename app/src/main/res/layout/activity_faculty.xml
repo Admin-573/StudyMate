@@ -7,6 +7,7 @@
     tools:context=".Faculty">
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -21,8 +22,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="12dp"
             android:fontFamily="@font/ubuntu"
-            android:text="Dear Faculty Login Here ~"
+            android:text="@string/enter_your_email_here"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="22sp" />
 
@@ -40,106 +42,47 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/faculty_login" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            app:placeholderText="Faculty Name">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/EdtFacultyName"
-                android:inputType="text"
-                android:drawableLeft="@drawable/admin_add_faculty_name"
-                android:drawablePadding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter Faculty Name"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="27dp"
             android:layout_marginLeft="25dp"
+            android:layout_marginTop="42dp"
             android:layout_marginRight="25dp"
+            android:layout_marginBottom="8dp"
             app:placeholderText="you@example.com">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EdtFacultyEmail"
-                android:inputType="textEmailAddress"
-                android:drawableLeft="@drawable/email"
-                android:drawablePadding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Faculty Email"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            app:placeholderText="Password"
-            app:passwordToggleEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/EdtFacultyPass"
-                android:inputType="textPassword"
+                android:drawableStart="@drawable/email"
                 android:drawablePadding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter Faculty Password"/>
+                android:hint="@string/enter_faculty_email"
+                android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/frgt_pass_faculty"
-            android:textSize="16sp"
-            android:layout_gravity="end"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="16dp"
-            android:layout_height="match_parent"
-            android:layout_width="wrap_content"
-            android:text="Forgot Password ?"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976"
-        android:orientation="vertical">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnFaculty_login"
+            android:id="@+id/btnCheck"
+            android:layout_marginTop="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:layout_marginBottom="2dp"
-            android:text="Login" />
+            android:layout_marginBottom="7dp"
+            android:text="@string/login" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBack"
+            style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginBottom="8dp"
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            android:text="Not Faculty ?" />
+            android:text="@string/go_to_home" />
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

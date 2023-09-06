@@ -31,8 +31,9 @@ class faculty_view : AppCompatActivity() {
         }
 
         adapter?.setOnClickItem{
-            Toast.makeText(this,it.faculty_name,Toast.LENGTH_SHORT).show()
             startActivity(Intent(applicationContext, faculty_update::class.java)
+                .putExtra("faculty_id",it.faculty_id)
+                .putExtra("faculty_image",it.faculty_image)
                 .putExtra("faculty_name",it.faculty_name)
                 .putExtra("faculty_email",it.faculty_email)
                 .putExtra("faculty_pass",it.faculty_password)

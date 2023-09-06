@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
@@ -31,6 +32,7 @@ import com.example.studymate.notice.notice_add
 import com.example.studymate.notice.notice_view
 import com.example.studymate.student.student_add
 import com.example.studymate.student.student_view
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import java.io.ByteArrayOutputStream
 
@@ -53,7 +55,6 @@ class Admin_panel : AppCompatActivity() {
         setContentView(R.layout.activity_admin_panel)
 
         sqLiteHelper = SQLiteHelper(this)
-
         adminSession= AdminSession(this)
 
         //Navigation Drawer
@@ -156,7 +157,8 @@ class Admin_panel : AppCompatActivity() {
             //Admin Adds Student
             add_student = findViewById(R.id.admin_view_student)
             add_student.setOnClickListener {
-                startActivity(Intent(applicationContext, student_view::class.java))
+                val i  = Intent(applicationContext, student_view::class.java)
+                startActivity(i)
             }
 
             //Admin Adds Notices

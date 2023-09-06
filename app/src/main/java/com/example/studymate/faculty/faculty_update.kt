@@ -1,10 +1,12 @@
 package com.example.studymate.faculty
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import com.example.studymate.R
 import com.example.studymate.database.AdminModel
@@ -16,6 +18,8 @@ class faculty_update : AppCompatActivity() {
     private lateinit var upd_email : EditText
     private lateinit var upd_password : EditText
     private lateinit var upd_sub : EditText
+    private lateinit var upd_image : ImageView
+    private lateinit var upd_id : EditText
     private lateinit var btn_upd : Button
     private lateinit var btn_back : Button
 
@@ -34,6 +38,11 @@ class faculty_update : AppCompatActivity() {
         upd_email.setText(intent.getStringExtra("faculty_email"))
         upd_password.setText(intent.getStringExtra("faculty_pass"))
         upd_sub.setText(intent.getStringExtra("faculty_sub"))
+        upd_id.setText(intent.getIntExtra("faculty_id",0).toString())
+        if(intent.getByteArrayExtra("faculty_image")!=null){
+            upd_image.setImageBitmap(BitmapFactory.decodeByteArray(intent.getByteArrayExtra("faculty_image"),0,intent.getByteArrayExtra("faculty_image")!!.size))
+        }
+
 
         btn_upd.setOnClickListener {
             if(validation()){
@@ -63,8 +72,8 @@ class faculty_update : AppCompatActivity() {
     }
 
     private fun updateFaculty() {
-        val faculty = AdminModel( faculty_name = upd_name.text.toString() , faculty_email = upd_email.text.toString(), faculty_sub = upd_sub.text.toString(), faculty_password = upd_password.text.toString())
-        val rc =  sqLiteHelper.updateFacultyByEmail(faculty)
+        val faculty = AdminModel( faculty_id = upd_id.text.toString().toInt(),faculty_name = upd_name.text.toString() , faculty_email = upd_email.text.toString(), faculty_sub = upd_sub.text.toString(), faculty_password = upd_password.text.toString())
+        val rc =  sqLiteHelper.updateFacultyById(faculty)
         if(rc > 0){
             getFaculty()
             Toast.makeText(applicationContext,"Update",Toast.LENGTH_SHORT).show()
@@ -84,6 +93,8 @@ class faculty_update : AppCompatActivity() {
         upd_email = findViewById(R.id.Admin_update_faculty_email)
         upd_password = findViewById(R.id.Admin_update_faculty_pass)
         upd_sub = findViewById(R.id.Admin_update_faculty_sub)
+        upd_id = findViewById(R.id.Admin_update_faculty_Id)
+        upd_image = findViewById(R.id.Admin_update_faculty_image)
         btn_upd = findViewById(R.id.btnAdmin_update_faculty)
         btn_back = findViewById(R.id.btnBack)
     }

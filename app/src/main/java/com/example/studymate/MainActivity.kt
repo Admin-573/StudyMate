@@ -10,28 +10,21 @@ import android.widget.Button
 class MainActivity : AppCompatActivity() {
 
     private lateinit var btnAdmin: Button
-    private lateinit var btnFaculty: Button
-    private lateinit var btnStudent: Button
+    private lateinit var btnOther: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         btnAdmin = findViewById(R.id.btnAdmin)
-        btnFaculty = findViewById(R.id.btnFaculty)
-        btnStudent = findViewById(R.id.btnStudent)
+        btnOther = findViewById(R.id.btnOther)
 
         btnAdmin.setOnClickListener {
             val Admin = Intent(applicationContext, Admin::class.java)
             startActivity(Admin)
         }
-        btnFaculty.setOnClickListener {
-            val Faculty = Intent(applicationContext,Faculty::class.java)
-            startActivity(Faculty)
-        }
-        btnStudent.setOnClickListener {
-            val Student = Intent(applicationContext,Student::class.java)
-            startActivity(Student)
+        btnOther.setOnClickListener {
+            startActivity(Intent(applicationContext,Faculty::class.java))
         }
     }
 }

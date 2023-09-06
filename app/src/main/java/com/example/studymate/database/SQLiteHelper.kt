@@ -181,7 +181,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
             db.execSQL(selectQuery)
             return ArrayList()
         }
-
+        var id : Int
         var image:ByteArray
         var name : String
         var email : String
@@ -190,13 +190,14 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
 
         if(cursor.moveToFirst()){
             do{
+                id = cursor.getInt(cursor.getColumnIndex(FACULTY_ID))
                 image = cursor.getBlob(cursor.getColumnIndex(FACULTY_IMAGE))
                 name = cursor.getString(cursor.getColumnIndex("faculty_name"))
                 email = cursor.getString(cursor.getColumnIndex("faculty_email"))
                 password = cursor.getString(cursor.getColumnIndex("faculty_password"))
                 subject = cursor.getString(cursor.getColumnIndex("faculty_sub"))
 
-                val adm = AdminModel(faculty_image = image,faculty_name = name, faculty_email = email, faculty_password = password, faculty_sub = subject)
+                val adm = AdminModel(faculty_id = id,faculty_image = image,faculty_name = name, faculty_email = email, faculty_password = password, faculty_sub = subject)
                 admList.add(adm)
 
             } while (cursor.moveToNext())
@@ -217,16 +218,17 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
     }
 
     //Updating Data Of Faculty
-    fun updateFacultyByEmail(adm: AdminModel): Int {
+    fun updateFacultyById(adm: AdminModel): Int {
         val db = this.writableDatabase
 
         val contentValues = ContentValues()
+        contentValues.put(FACULTY_ID,adm.faculty_id)
         contentValues.put(FACULTY_NAME,adm.faculty_name)
         contentValues.put(FACULTY_SUB,adm.faculty_sub)
         contentValues.put(FACULTY_PASSWORD,adm.faculty_password)
 
-        val email = adm.faculty_email
-        val UpdateQuery = db.update(TBL_FACULTY,contentValues,"$FACULTY_EMAIL = '$email'",null)
+        val id = adm.faculty_id
+        val UpdateQuery = db.update(TBL_FACULTY,contentValues,"$FACULTY_ID = $id",null)
         db.close()
         return UpdateQuery
     }
@@ -265,6 +267,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
             db.execSQL(selectQuery)
             return ArrayList()
         }
+        var id : Int
         var image : ByteArray
         var name : String
         var email : String
@@ -273,13 +276,14 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
 
         if(cursor.moveToFirst()){
             do{
+                id = cursor.getInt(cursor.getColumnIndex(STUDENT_ID))
                 image = cursor.getBlob(cursor.getColumnIndex(STUDENT_IMAGE))
                 name = cursor.getString(cursor.getColumnIndex("student_name"))
                 email = cursor.getString(cursor.getColumnIndex("student_email"))
                 password = cursor.getString(cursor.getColumnIndex("student_password"))
                 stud_class = cursor.getString(cursor.getColumnIndex("student_class"))
 
-                val adm = AdminModel(student_name = name, student_email = email, student_password = password, student_class = stud_class, student_image = image)
+                val adm = AdminModel(student_id = id,student_name = name, student_email = email, student_password = password, student_class = stud_class, student_image = image)
                 admList.add(adm)
 
             } while (cursor.moveToNext())
@@ -300,16 +304,17 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
     }
 
     //Updating Data Of Student
-    fun updateStudentByEmail(adm: AdminModel): Int {
+    fun updateStudentById(adm: AdminModel): Int {
         val db = this.writableDatabase
 
         val contentValues = ContentValues()
+        contentValues.put(STUDENT_EMAIL,adm.student_email)
         contentValues.put(STUDENT_NAME,adm.student_name)
         contentValues.put(STUDENT_PASSWORD,adm.student_password)
         contentValues.put(STUDENT_CLASS,adm.student_class)
 
-        val email = adm.student_email
-        val UpdateQuery = db.update(TBL_STUDENT,contentValues,"$STUDENT_EMAIL = '$email'",null)
+        val id = adm.student_id
+        val UpdateQuery = db.update(TBL_STUDENT,contentValues,"$STUDENT_ID = $id",null)
         db.close()
         return UpdateQuery
     }
@@ -438,6 +443,98 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         val DeleteQuery = db.delete(TBL_ASSIGNMENT,"assignment_name=$ASSIGNMENT_NAME",null)
         db.close()
         return DeleteQuery
+    }
+
+    //facultyLogin
+
+    fun isFaculty(email : String) : ArrayList<AdminModel>{
+        val db  = this.readableDatabase
+        val facultyList : ArrayList<AdminModel> = ArrayList()
+        val cursor : Cursor?
+        try{
+            cursor = db.rawQuery("SELECT * FROM $TBL_FACULTY WHERE $FACULTY_EMAIL = '$email' ",null)
+        }catch (e:SQLiteException){
+            e.printStackTrace()
+            return facultyList
+        }
+        if(cursor.moveToFirst()){
+            do{
+                val faculty = AdminModel(
+                    faculty_id = cursor.getInt(cursor.getColumnIndex("faculty_id")),
+                    faculty_email = cursor.getString(cursor.getColumnIndex("faculty_email")),
+                    faculty_password = cursor.getString(cursor.getColumnIndex("faculty_password"))
+                )
+                facultyList.add(faculty)
+            }while (cursor.moveToNext())
+        }
+        return facultyList
+    }
+
+    fun isStudent(email : String) : ArrayList<AdminModel>{
+        val db  = this.readableDatabase
+        val studentList : ArrayList<AdminModel> = ArrayList()
+        val cursor : Cursor?
+        try{
+            cursor = db.rawQuery("SELECT * FROM $TBL_STUDENT WHERE $STUDENT_EMAIL = '$email' ",null)
+        }catch (e:SQLiteException){
+            e.printStackTrace()
+            return studentList
+        }
+        if(cursor.moveToFirst()){
+            do{
+                val faculty = AdminModel(
+                    student_id = cursor.getInt(cursor.getColumnIndex("student_id")),
+                    student_email = cursor.getString(cursor.getColumnIndex("student_email")),
+                    student_password = cursor.getString(cursor.getColumnIndex("student_password"))
+                )
+                studentList.add(faculty)
+            }while (cursor.moveToNext())
+        }
+        return studentList
+    }
+
+    fun chkPasswdStudent(id : Int) : ArrayList<AdminModel>{
+        val db  = this.readableDatabase
+        val studentList : ArrayList<AdminModel> = ArrayList()
+        val cursor : Cursor?
+        try{
+            cursor = db.rawQuery("SELECT * FROM $TBL_STUDENT WHERE $STUDENT_ID = $id ",null)
+        }catch (e:SQLiteException){
+            e.printStackTrace()
+            return studentList
+        }
+        if(cursor.moveToFirst()){
+            do{
+                val student = AdminModel(
+                    student_id = cursor.getInt(cursor.getColumnIndex("student_id")),
+                    student_password = cursor.getString(cursor.getColumnIndex("student_password"))
+                )
+                studentList.add(student)
+            }while (cursor.moveToNext())
+        }
+        return studentList
+    }
+
+    fun chkPasswdFaculty(id : Int) : ArrayList<AdminModel>{
+        val db  = this.readableDatabase
+        val facultyList : ArrayList<AdminModel> = ArrayList()
+        val cursor : Cursor?
+        try{
+            cursor = db.rawQuery("SELECT * FROM $TBL_FACULTY WHERE $FACULTY_ID = $id ",null)
+        }catch (e:SQLiteException){
+            e.printStackTrace()
+            return facultyList
+        }
+        if(cursor.moveToFirst()){
+            do{
+                val faculty = AdminModel(
+                    faculty_id = cursor.getInt(cursor.getColumnIndex(FACULTY_ID)),
+                    faculty_password = cursor.getString(cursor.getColumnIndex(FACULTY_PASSWORD))
+                )
+                facultyList.add(faculty)
+            }while (cursor.moveToNext())
+        }
+        return facultyList
     }
 
 }

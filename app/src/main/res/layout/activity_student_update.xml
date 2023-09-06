@@ -26,19 +26,39 @@
             android:text="Update Student Data"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/under_dev"
-            android:layout_width="256dp"
-            android:layout_height="256dp"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/Admin_update_student_image"
+            android:layout_width="148dp"
+            android:layout_height="148dp"
+            android:src="@drawable/add_img"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/admin_upd_stud" />
+            android:layout_marginTop="27dp"
+            android:layout_marginBottom="27dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="8dp"
+            app:placeholderText="Name...">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Admin_update_student_Id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/sid"
+                android:drawablePadding="10dp"
+                android:hint="Student Sid"
+                android:editable="false"
+                android:focusable="false"
+                android:cursorVisible="false"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -73,9 +93,8 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/email"
                 android:drawablePadding="10dp"
-                android:focusable="false"
                 android:hint="Email"
-                android:inputType="textPersonName" />
+                android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

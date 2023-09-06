@@ -22,16 +22,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ubuntu"
-            android:text="Dear Student Login Here ~"
-            android:layout_marginTop="2dp"
+            android:text="Enter password and login here ~"
+            android:layout_margin="12dp"
             android:layout_marginBottom="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="22sp" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/under_dev"
-            android:layout_width="256dp"
-            android:layout_height="256dp"
+            android:layout_width="252dp"
+            android:layout_height="252dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -39,6 +39,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5"
             app:lottie_autoPlay="true"
+            android:layout_margin="27dp"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/student_login" />
 
@@ -48,16 +49,21 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            app:placeholderText="Student Name">
+            android:layout_marginTop="32dp"
+            app:placeholderText="User id">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/EdtStudentName"
+                android:id="@+id/EdtUserId"
                 android:inputType="text"
-                android:drawableLeft="@drawable/admin_profile"
+                android:drawableLeft="@drawable/sid"
                 android:drawablePadding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Student Name"/>
+                android:editable="false"
+                android:focusable="false"
+                android:cursorVisible="false"
+                android:focusableInTouchMode="false"
+                android:hint="User id"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,48 +73,19 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            app:placeholderText="you@example.com">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/EdtStudentEmail"
-                android:inputType="textEmailAddress"
-                android:drawableLeft="@drawable/email"
-                android:drawablePadding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter Student Email"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
+            android:layout_marginTop="7dp"
             app:placeholderText="Password"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/EdtStudentPass"
-                android:inputType="textPassword"
-                android:drawablePadding="10dp"
+                android:id="@+id/EdtUserPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Student Password"/>
+                android:drawablePadding="10dp"
+                android:hint="Enter your password"
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/frgt_pass_student"
-            android:textSize="16sp"
-            android:layout_gravity="end"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="16dp"
-            android:layout_height="match_parent"
-            android:layout_width="wrap_content"
-            android:text="Forgot Password ?"/>
-
     </LinearLayout>
 
     <LinearLayout
@@ -124,7 +101,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnStudent_login"
+            android:id="@+id/userLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
@@ -133,14 +110,14 @@
             android:text="Login" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBack"
+            android:id="@+id/userBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginBottom="8dp"
             style="@style/Widget.Material3.Button.OutlinedButton"
-            android:text="Not Student ?" />
+            android:text="Want to change email ?" />
 
     </LinearLayout>
 

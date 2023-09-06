@@ -3,6 +3,8 @@ package com.example.studymate.student
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,13 +33,16 @@ class student_view : AppCompatActivity() {
         }
 
         adapter?.setOnClickItem{
-            Toast.makeText(this,it.student_name,Toast.LENGTH_SHORT).show()
+            Log.d("checkSid",it.student_id.toString())
             startActivity(
                 Intent(applicationContext, student_update::class.java)
-                .putExtra("student_name",it.student_name)
-                .putExtra("student_email",it.student_email)
-                .putExtra("student_pass",it.student_password)
-                .putExtra("student_class",it.student_class))
+                    .putExtra("student_id",it.student_id)
+                    .putExtra("student_image",it.student_image)
+                    .putExtra("student_name",it.student_name)
+                    .putExtra("student_email",it.student_email)
+                    .putExtra("student_pass",it.student_password)
+                    .putExtra("student_class",it.student_class)
+            )
         }
     }
 
