@@ -16,22 +16,13 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.036">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/ubuntu"
-            android:text="Enter password and login here ~"
-            android:layout_margin="12dp"
-            android:layout_marginBottom="8dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="22sp" />
+        app:layout_constraintVertical_bias="0.069">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/under_dev"
             android:layout_width="252dp"
             android:layout_height="252dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -39,43 +30,63 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5"
             app:lottie_autoPlay="true"
-            android:layout_margin="27dp"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/student_login" />
 
-        <com.google.android.material.textfield.TextInputLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:fontFamily="@font/ubuntu"
+            android:text="Enter password and login here ~"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="22sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/ubuntu"
+            android:gravity="center"
+            android:text="Sutex Bank College Of Computer Application And Science"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="18sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
+            android:layout_marginTop="12dp"
             android:layout_marginRight="25dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginBottom="8dp"
             app:placeholderText="User id">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EdtUserId"
-                android:inputType="text"
-                android:drawableLeft="@drawable/sid"
-                android:drawablePadding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:cursorVisible="false"
+                android:drawableLeft="@drawable/sid"
+                android:drawablePadding="10dp"
                 android:editable="false"
                 android:focusable="false"
-                android:cursorVisible="false"
                 android:focusableInTouchMode="false"
-                android:hint="User id"/>
+                android:hint="User ID"
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
+            android:layout_marginTop="4dp"
             android:layout_marginRight="25dp"
-            android:layout_marginTop="7dp"
-            app:placeholderText="Password"
-            app:passwordToggleEnabled="true">
+            android:layout_marginBottom="8dp"
+            app:passwordToggleEnabled="true"
+            app:placeholderText="Password">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EdtUserPassword"
@@ -89,16 +100,16 @@
     </LinearLayout>
 
     <LinearLayout
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976"
-        android:orientation="vertical">
+        app:layout_constraintVertical_bias="0.974">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/userLogin"
@@ -111,12 +122,12 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/userBack"
+            style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginBottom="8dp"
-            style="@style/Widget.Material3.Button.OutlinedButton"
             android:text="Want to change email ?" />
 
     </LinearLayout>

@@ -17,16 +17,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.036">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:fontFamily="@font/ubuntu"
-            android:text="@string/enter_your_email_here"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="22sp" />
+        app:layout_constraintVertical_bias="0.067">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/under_dev"
@@ -42,6 +33,27 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/faculty_login" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/ubuntu"
+            android:text="StudyMate"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:fontFamily="@font/ubuntu"
+            android:gravity="center"
+            android:text="Sutex Bank College Of Computer Application And Science"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="18sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -59,19 +71,33 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/email"
                 android:drawablePadding="10dp"
-                android:hint="@string/enter_faculty_email"
+                android:hint="Enter Your Email"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.973">
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCheck"
-            android:layout_marginTop="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
+            android:layout_marginTop="12dp"
             android:layout_marginRight="50dp"
-            android:layout_marginBottom="7dp"
+            android:layout_marginBottom="2dp"
             android:text="@string/login" />
 
         <com.google.android.material.button.MaterialButton

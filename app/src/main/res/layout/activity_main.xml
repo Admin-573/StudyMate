@@ -15,9 +15,9 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <LinearLayout
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,7 +25,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.172">
+        app:layout_constraintVertical_bias="0.057">
 
         <TextView
             android:layout_width="wrap_content"
@@ -88,7 +88,7 @@
             android:layout_marginRight="25dp"
             android:layout_marginBottom="8dp"
             style="@style/Widget.Material3.Button.OutlinedButton"
-            android:text="Other Login" />
+            android:text="Faculty Or Student" />
 
     </LinearLayout>
 
