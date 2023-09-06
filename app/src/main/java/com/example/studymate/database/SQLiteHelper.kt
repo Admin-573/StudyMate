@@ -128,6 +128,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         return insertQuery
     }
 
+    @SuppressLint("Range")
     fun getAdmin(email : String) : ArrayList<AdminModel>{
         val db  = this.readableDatabase
         val adminImageList : ArrayList<AdminModel> = ArrayList()
@@ -225,6 +226,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         contentValues.put(FACULTY_ID,adm.faculty_id)
         contentValues.put(FACULTY_NAME,adm.faculty_name)
         contentValues.put(FACULTY_SUB,adm.faculty_sub)
+        contentValues.put(FACULTY_EMAIL,adm.faculty_email)
         contentValues.put(FACULTY_PASSWORD,adm.faculty_password)
 
         val id = adm.faculty_id
@@ -447,6 +449,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
 
     //facultyLogin
 
+    @SuppressLint("Range")
     fun isFaculty(email : String) : ArrayList<AdminModel>{
         val db  = this.readableDatabase
         val facultyList : ArrayList<AdminModel> = ArrayList()
@@ -470,6 +473,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         return facultyList
     }
 
+    @SuppressLint("Range")
     fun isStudent(email : String) : ArrayList<AdminModel>{
         val db  = this.readableDatabase
         val studentList : ArrayList<AdminModel> = ArrayList()
@@ -493,6 +497,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         return studentList
     }
 
+    @SuppressLint("Range")
     fun chkPasswdStudent(id : Int) : ArrayList<AdminModel>{
         val db  = this.readableDatabase
         val studentList : ArrayList<AdminModel> = ArrayList()
@@ -515,6 +520,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         return studentList
     }
 
+    @SuppressLint("Range")
     fun chkPasswdFaculty(id : Int) : ArrayList<AdminModel>{
         val db  = this.readableDatabase
         val facultyList : ArrayList<AdminModel> = ArrayList()

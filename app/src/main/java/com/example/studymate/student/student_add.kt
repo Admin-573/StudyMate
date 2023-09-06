@@ -59,10 +59,10 @@ class student_add : AppCompatActivity() {
     }
 
     private fun addStudent() {
-        val name = student_name.text.toString().uppercase()
-        val email = student_email.text.toString().uppercase()
-        val pass = student_password.text.toString().uppercase()
-        val sub = student_class.text.toString().uppercase()
+        val name = student_name.text.toString()
+        val email = student_email.text.toString()
+        val pass = student_password.text.toString()
+        val sub = student_class.text.toString()
 
         val student = AdminModel(
             student_id = STUD_ID,

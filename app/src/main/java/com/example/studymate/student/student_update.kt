@@ -57,7 +57,7 @@ class student_update : AppCompatActivity() {
     }
 
     private fun updateStudent() {
-        val student = AdminModel( student_id = upd_id.text.toString().toInt(),student_name = upd_name.text.toString().uppercase() , student_email = upd_email.text.toString().uppercase(), student_class = upd_class.text.toString().uppercase(), student_password = upd_password.text.toString().uppercase())
+        val student = AdminModel( student_id = upd_id.text.toString().toInt(),student_name = upd_name.text.toString() , student_email = upd_email.text.toString(), student_class = upd_class.text.toString(), student_password = upd_password.text.toString())
         val rc =  sqLiteHelper.updateStudentById(student)
         if(rc > 0){
             getStudent()

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -72,8 +73,10 @@ class faculty_update : AppCompatActivity() {
     }
 
     private fun updateFaculty() {
-        val faculty = AdminModel( faculty_id = upd_id.text.toString().toInt(),faculty_name = upd_name.text.toString().uppercase() , faculty_email = upd_email.text.toString().uppercase(), faculty_sub = upd_sub.text.toString().uppercase(), faculty_password = upd_password.text.toString().uppercase())
+        val faculty = AdminModel( faculty_id = upd_id.text.toString().toInt(),faculty_name = upd_name.text.toString() , faculty_email = upd_email.text.toString(), faculty_sub = upd_sub.text.toString(), faculty_password = upd_password.text.toString())
+        Log.d("apd",faculty.faculty_email)
         val rc =  sqLiteHelper.updateFacultyById(faculty)
+        Log.d("apd",rc.toString())
         if(rc > 0){
             getFaculty()
             Toast.makeText(applicationContext,"Update",Toast.LENGTH_SHORT).show()
