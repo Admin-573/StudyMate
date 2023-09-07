@@ -9,9 +9,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.addCallback
+import androidx.appcompat.app.AlertDialog
 import com.example.studymate.R
 import com.example.studymate.database.AdminModel
 import com.example.studymate.database.SQLiteHelper
+import com.example.studymate.databinding.ActivityFacultyUpdateBinding
+import com.example.studymate.databinding.ActivityFacultyViewBinding
+import com.example.studymate.student.student_view
 
 class faculty_update : AppCompatActivity() {
 
@@ -22,14 +27,17 @@ class faculty_update : AppCompatActivity() {
     private lateinit var upd_image : ImageView
     private lateinit var upd_id : EditText
     private lateinit var btn_upd : Button
-    private lateinit var btn_back : Button
+    private lateinit var btn_delete : Button
+
+    private lateinit var binding : ActivityFacultyUpdateBinding
 
     private lateinit var sqLiteHelper: SQLiteHelper
     private var adapter : FacultyAdapter?= null
     private var adm : AdminModel?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_faculty_update)
+        binding = ActivityFacultyUpdateBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         initView()
         sqLiteHelper = SQLiteHelper(this)
@@ -53,9 +61,19 @@ class faculty_update : AppCompatActivity() {
             }
         }
 
-        btn_back.setOnClickListener {
-            onBackPressed()
+        btn_delete.setOnClickListener {
+            val email = intent.getStringExtra("faculty_email")
+            if(email!=null) {
+                deleteFaculty(email)
+            }
         }
+
+        binding.topAppBar.setNavigationOnClickListener {
+            startActivity(Intent(applicationContext, faculty_view::class.java))
+            finish()
+        }
+
+        onBackPressedDispatcher.addCallback {  }
     }
 
     private fun validation(): Boolean {
@@ -91,6 +109,25 @@ class faculty_update : AppCompatActivity() {
         adapter?.addItems(admList)
     }
 
+    private fun deleteFaculty(email: String)
+    {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Do You Want To Delete This Faculty ?")
+        builder.setCancelable(true)
+        builder.setPositiveButton("Yes") { dialog,_->
+            sqLiteHelper.DeleteFaculty(email)
+            getFaculty()
+            dialog.dismiss()
+            startActivity(Intent(applicationContext,faculty_view::class.java))
+        }
+        builder.setNegativeButton("No"){ dialog,_->
+            dialog.dismiss()
+        }
+        val alert = builder.create()
+        alert.show()
+
+    }
+
     private fun initView() {
         upd_name = findViewById(R.id.Admin_update_faculty_name)
         upd_email = findViewById(R.id.Admin_update_faculty_email)
@@ -99,6 +136,6 @@ class faculty_update : AppCompatActivity() {
         upd_id = findViewById(R.id.Admin_update_faculty_Id)
         upd_image = findViewById(R.id.Admin_update_faculty_image)
         btn_upd = findViewById(R.id.btnAdmin_update_faculty)
-        btn_back = findViewById(R.id.btnBack)
+        btn_delete = findViewById(R.id.btnDeleteFaculty)
     }
 }

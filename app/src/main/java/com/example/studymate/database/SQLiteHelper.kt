@@ -19,6 +19,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
 
         //Admin Table
         private const val TBL_ADMIN = "tbl_admin"
+        private const val ADMIN_ID = "admin_id"
         private const val ADMIN_IMAGE = "admin_image"
         private const val ADMIN_NAME = "admin_name"
         private const val ADMIN_EMAIL = "admin_email"
@@ -56,7 +57,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
 
     override fun onCreate(p0: SQLiteDatabase?) {
         //Admin Table
-        val createTblAdmin = "CREATE TABLE $TBL_ADMIN($ADMIN_IMAGE BLOB,$ADMIN_NAME TEXT NOT NULL,$ADMIN_EMAIL VARCHAR(128) PRIMARY KEY);"
+        val createTblAdmin = "CREATE TABLE $TBL_ADMIN($ADMIN_ID INT ,$ADMIN_IMAGE BLOB,$ADMIN_NAME TEXT NOT NULL,$ADMIN_EMAIL VARCHAR(128) PRIMARY KEY);"
         p0?.execSQL(createTblAdmin)
 
         //Faculty Table
@@ -103,6 +104,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         val db = this.writableDatabase
 
         val contentValues = ContentValues()
+        contentValues.put(ADMIN_ID,adm.admin_id)
         contentValues.put(ADMIN_NAME,adm.admin_name)
         contentValues.put(ADMIN_EMAIL,adm.admin_email)
 
@@ -142,6 +144,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         if(cursor.moveToFirst()){
             do{
                 val admin = AdminModel(
+                    admin_id = cursor.getInt(cursor.getColumnIndex(ADMIN_ID)),
                     admin_image = cursor.getBlob(cursor.getColumnIndex("admin_image")),
                     admin_email = cursor.getString(cursor.getColumnIndex("admin_email")),
                     admin_name = cursor.getString(cursor.getColumnIndex("admin_name"))
@@ -205,6 +208,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         }
         return admList
     }
+
 
     //Deleting Data Of Faculty
     fun DeleteFaculty(email: String): Int{

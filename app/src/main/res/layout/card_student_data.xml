@@ -12,8 +12,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/student_view_image"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:src="@drawable/add_img"
         android:layout_gravity="center"
         android:layout_marginEnd="8dp"/>
@@ -21,10 +21,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_marginStart="4dp"
         android:orientation="vertical">
 
         <TextView
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:layout_marginBottom="4dp"
             android:id="@+id/student_view_name"
@@ -39,29 +40,13 @@
             android:layout_marginBottom="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14dp"
+            android:textSize="12dp"
             android:textColor="@color/black"
             android:fontFamily="@font/ubuntu"
             tools:text="Email"/>
 
-        <TextView
-            android:id="@+id/student_view_sub"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/ubuntu"
-            tools:text="Standard"/>
+
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnDeleteStudent"
-        android:fontFamily="@font/ubuntu"
-        android:backgroundTint="#4F3281"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:text="DELETE"/>
 
 </LinearLayout>

@@ -6,31 +6,34 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.studymate.R
+import com.example.studymate.admin.Admin_panel
 import com.example.studymate.database.AdminModel
 import com.example.studymate.database.SQLiteHelper
+import com.example.studymate.databinding.ActivityStudentViewBinding
 
 class student_view : AppCompatActivity() {
     private lateinit var sqLiteHelper: SQLiteHelper
     private lateinit var recyclerView: RecyclerView
     private var adapter : StudentAdapter?= null
     private var adm : AdminModel?= null
+
+    private lateinit var binding : ActivityStudentViewBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_student_view)
+        binding = ActivityStudentViewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         sqLiteHelper = SQLiteHelper(this)
         initRecyclerView()
 
         val admList = sqLiteHelper.getAllStudent()
         adapter?.addItems(admList)
-
-        adapter?.setOnClickDeleteItem {
-            deleteStudent(it.student_email)
-        }
 
         adapter?.setOnClickItem{
             Log.d("checkSid",it.student_id.toString())
@@ -44,27 +47,14 @@ class student_view : AppCompatActivity() {
                     .putExtra("student_class",it.student_class)
             )
         }
-    }
 
-    private fun deleteStudent(studentEmail: String) {
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage("Do You Want To Delete This Student ?")
-        builder.setCancelable(true)
-        builder.setPositiveButton("Yes") { dialog,_->
-            sqLiteHelper.DeleteStudent(studentEmail)
-            getStudent()
-            dialog.dismiss()
+        binding.topAppBar.setNavigationOnClickListener {
+            startActivity(Intent(applicationContext,Admin_panel::class.java))
+            finish()
         }
-        builder.setNegativeButton("No"){ dialog,_->
-            dialog.dismiss()
-        }
-        val alert = builder.create()
-        alert.show()
-    }
 
-    private fun getStudent() {
-        val admList = sqLiteHelper.getAllStudent()
-        adapter?.addItems(admList)
+        onBackPressedDispatcher.addCallback {  }
+
     }
 
     private fun initRecyclerView() {

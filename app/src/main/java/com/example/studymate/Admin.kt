@@ -26,6 +26,8 @@ class Admin : AppCompatActivity() {
     private lateinit var admin_back: Button
 
     private lateinit var adminSession: AdminSession
+    private val AM_ID : Int = (2100000..2200000).random()
+
 
     private lateinit var sqLiteHelper: SQLiteHelper
     private lateinit var recyclerView: RecyclerView
@@ -68,18 +70,16 @@ class Admin : AppCompatActivity() {
     private fun addAdmin() {
         val name = admin_name.text.toString()
         val email = admin_email.text.toString()
-        val adm = AdminModel(admin_name = name, admin_email = email)
+        val adm = AdminModel(admin_id = AM_ID,admin_name = name, admin_email = email)
         val status = sqLiteHelper.InsertAdmin(adm)
         if(status > -1)
         {
-            adminSession.adminLogin(email,name)
+            adminSession.adminLogin(email,name,AM_ID)
             Toast.makeText(this,"Admin Logged In",Toast.LENGTH_SHORT).show()
             finish()
         }
-        else
-        {
-            adminSession.adminLogin(email,name)
-            Toast.makeText(this,"Admin Founded Good To Go ~",Toast.LENGTH_SHORT).show()
+        else {
+            Toast.makeText(this,"Something went wrong !",Toast.LENGTH_SHORT).show()
         }
     }
 

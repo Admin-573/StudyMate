@@ -4,14 +4,20 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.addCallback
+import androidx.appcompat.app.AlertDialog
 import com.example.studymate.R
 import com.example.studymate.database.AdminModel
 import com.example.studymate.database.SQLiteHelper
+import com.example.studymate.databinding.ActivityStudentUpdateBinding
 import com.example.studymate.faculty.FacultyAdapter
+import com.google.android.material.navigation.NavigationBarMenu
+import com.google.android.material.navigation.NavigationView
 
 class student_update : AppCompatActivity() {
     private lateinit var upd_name : EditText
@@ -21,14 +27,17 @@ class student_update : AppCompatActivity() {
     private lateinit var upd_image : ImageView
     private lateinit var upd_id:EditText
     private lateinit var btn_upd : Button
-    private lateinit var btn_back : Button
+    private lateinit var btn_delete : Button
+
+    private lateinit var binding : ActivityStudentUpdateBinding
 
     private lateinit var sqLiteHelper: SQLiteHelper
     private var adapter : FacultyAdapter?= null
     private var adm : AdminModel?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_student_update)
+        binding = ActivityStudentUpdateBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         initView()
         sqLiteHelper = SQLiteHelper(this)
@@ -51,9 +60,19 @@ class student_update : AppCompatActivity() {
             }
         }
 
-        btn_back.setOnClickListener {
-            onBackPressed()
+        btn_delete.setOnClickListener {
+            val email = intent.getStringExtra("student_email")
+            if(email!=null) {
+                deleteStudent(email)
+            }
         }
+
+        binding.topAppBar.setNavigationOnClickListener {
+            startActivity(Intent(applicationContext,student_view::class.java))
+            finish()
+        }
+
+        onBackPressedDispatcher.addCallback {  }
     }
 
     private fun updateStudent() {
@@ -87,6 +106,24 @@ class student_update : AppCompatActivity() {
         return true
     }
 
+    private fun deleteStudent(studentEmail: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Do You Want To Delete This Student ?")
+        builder.setCancelable(true)
+        builder.setPositiveButton("Yes") { dialog,_->
+            sqLiteHelper.DeleteStudent(studentEmail)
+            getStudent()
+            dialog.dismiss()
+            startActivity(Intent(applicationContext,student_view::class.java))
+        }
+        builder.setNegativeButton("No"){ dialog,_->
+            dialog.dismiss()
+        }
+        val alert = builder.create()
+        alert.show()
+    }
+
+
     private fun initView() {
         upd_name = findViewById(R.id.Admin_update_student_name)
         upd_email = findViewById(R.id.Admin_update_student_email)
@@ -95,6 +132,6 @@ class student_update : AppCompatActivity() {
         upd_image = findViewById(R.id.Admin_update_student_image)
         upd_id = findViewById(R.id.Admin_update_student_Id)
         btn_upd = findViewById(R.id.btnAdmin_update_student)
-        btn_back = findViewById(R.id.btnBack)
+        btn_delete = findViewById(R.id.btnDeleteStudent)
     }
 }

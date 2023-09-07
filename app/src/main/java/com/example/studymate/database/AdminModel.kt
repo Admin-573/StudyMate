@@ -2,6 +2,7 @@ package com.example.studymate.database
 
 data class AdminModel (
     // Admin Content
+    var admin_id : Int? = null,
     var admin_image : ByteArray?= null,
     var admin_name : String = "",
     var admin_email : String = "",

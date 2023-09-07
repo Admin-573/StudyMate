@@ -4,31 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".faculty.faculty_update">
+    tools:context=".admin.Admin_view">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="128dp"
+        android:background="@drawable/rc_admin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back_24"
+            android:background="@drawable/rc1_admin"
+            android:padding="7dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="17dp"
+            android:contentDescription="Back Button" />
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:navigationIcon="@drawable/back_24" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
+        android:layout_marginTop="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -37,9 +39,9 @@
         app:layout_constraintVertical_bias="0.031">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/Admin_update_faculty_image"
-            android:layout_width="148dp"
-            android:layout_height="148dp"
+            android:id="@+id/Admin_updateimage"
+            android:layout_width="152dp"
+            android:layout_height="152dp"
             android:src="@drawable/add_img"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,12 +59,12 @@
             app:placeholderText="Name...">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Admin_update_faculty_Id"
+                android:id="@+id/Admin_updateId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/sid"
                 android:drawablePadding="10dp"
-                android:hint="Faculty Fid"
+                android:hint="Admin id"
                 android:editable="false"
                 android:focusable="false"
                 android:cursorVisible="false"
@@ -79,13 +81,13 @@
             app:placeholderText="Name...">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Admin_update_faculty_name"
+                android:id="@+id/Admin_updatename"
                 android:inputType="text"
                 android:drawableLeft="@drawable/admin_add_faculty_name"
                 android:drawablePadding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Update Name"/>
+                android:hint="Admin Name"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,7 +100,7 @@
             app:placeholderText="Email...">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Admin_update_faculty_email"
+                android:id="@+id/Admin_updateemail"
                 android:inputType="textEmailAddress"
                 android:drawableLeft="@drawable/email"
                 android:drawablePadding="10dp"
@@ -108,57 +110,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            app:passwordToggleEnabled="true"
-            app:placeholderText="Password">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Admin_update_faculty_pass"
-                android:inputType="textPassword"
-                android:drawablePadding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Update Pass For Faculty"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginBottom="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            app:placeholderText="Subject...">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Admin_update_faculty_sub"
-                android:inputType="text"
-                android:drawablePadding="10dp"
-                android:drawableLeft="@drawable/admin_add_faculty_sub"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Update Subject"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976"
-        android:orientation="vertical">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAdmin_update_faculty"
@@ -167,23 +119,10 @@
             android:layout_marginLeft="50dp"
             android:translationZ="@null"
             android:elevation="3dp"
+            android:layout_marginTop="32dp"
             android:layout_marginRight="50dp"
             android:layout_marginBottom="2dp"
-            android:text="Update Faculty" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnDeleteFaculty"
-            style="@style/Widget.Material3.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
-            android:translationZ="@null"
-            android:elevation="3dp"
-            android:textColor="#F44336"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginBottom="8dp"
-            android:text="Delete Faculty" />
+            android:text="Update your detail" />
 
     </LinearLayout>
 

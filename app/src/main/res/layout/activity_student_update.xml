@@ -6,6 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".student.student_update">
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/back_24" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,13 +35,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.107">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/ubuntu"
-            android:text="Update Student Data"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/Admin_update_student_image"
@@ -155,19 +165,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
+            android:translationZ="@null"
+            android:elevation="3dp"
             android:layout_marginRight="50dp"
             android:layout_marginBottom="2dp"
             android:text="Update Student" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBack"
-            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:id="@+id/btnDeleteStudent"
+            style="@style/Widget.Material3.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
+            android:translationZ="@null"
+            android:elevation="3dp"
+            android:textColor="#F44336"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginBottom="8dp"
-            android:text="Not Want To Update ?" />
+            android:text="Delete Student" />
 
     </LinearLayout>
 

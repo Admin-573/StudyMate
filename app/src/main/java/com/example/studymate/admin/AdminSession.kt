@@ -18,7 +18,8 @@ class AdminSession(var context: Context) {
         this.editor =sharedPreferences.edit()
     }
 
-    fun adminLogin(email : String,name : String){
+    fun adminLogin(email : String,name : String,id : Int){
+        editor.putInt("id",id)
         editor.putBoolean("login",true)
         editor.putString("email",email)
         editor.putString("name",name)

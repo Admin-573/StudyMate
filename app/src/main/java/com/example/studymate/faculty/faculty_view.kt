@@ -4,31 +4,34 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.studymate.R
+import com.example.studymate.admin.Admin_panel
 import com.example.studymate.database.AdminModel
 import com.example.studymate.database.SQLiteHelper
+import com.example.studymate.databinding.ActivityFacultyViewBinding
 
 class faculty_view : AppCompatActivity() {
     private lateinit var sqlitehelper : SQLiteHelper
     private lateinit var recyclerView : RecyclerView
     private var adapter : FacultyAdapter?= null
     private var adm : AdminModel?= null
+
+    private lateinit var binding : ActivityFacultyViewBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_faculty_view)
+        binding = ActivityFacultyViewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         sqlitehelper = SQLiteHelper(this)
         initRecyclerView()
 
         val admList = sqlitehelper.getAllFaculty()
         adapter?.addItems(admList)
-
-        adapter?.setOnClickDeleteItem {
-            deleteFaculty(it.faculty_email)
-        }
 
         adapter?.setOnClickItem{
             startActivity(Intent(applicationContext, faculty_update::class.java)
@@ -39,30 +42,21 @@ class faculty_view : AppCompatActivity() {
                 .putExtra("faculty_pass",it.faculty_password)
                 .putExtra("faculty_sub",it.faculty_sub))
         }
+
+
+        binding.topAppBar.setNavigationOnClickListener {
+            startActivity(Intent(applicationContext, Admin_panel::class.java))
+            finish()
+        }
+
+        onBackPressedDispatcher.addCallback {  }
+
     }
     private fun initRecyclerView() {
         recyclerView = findViewById(R.id.recyclerViewFaculty)
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = FacultyAdapter()
         recyclerView.adapter = adapter
-    }
-
-    private fun deleteFaculty(email: String)
-    {
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage("Do You Want To Delete This Faculty ?")
-        builder.setCancelable(true)
-        builder.setPositiveButton("Yes") { dialog,_->
-            sqlitehelper.DeleteFaculty(email)
-            getFaculty()
-            dialog.dismiss()
-        }
-        builder.setNegativeButton("No"){ dialog,_->
-            dialog.dismiss()
-        }
-        val alert = builder.create()
-        alert.show()
-
     }
 
     private fun getFaculty() {

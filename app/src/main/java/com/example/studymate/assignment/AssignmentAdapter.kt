@@ -13,7 +13,6 @@ class AssignmentAdapter : RecyclerView.Adapter<AssignmentAdapter.AssignmentViewH
 
     private var admList : ArrayList<AdminModel> = ArrayList()
     private var onClickItem : ((AdminModel) -> Unit) ?= null
-    private var onClickDeleteItem : ((AdminModel) -> Unit) ?= null
 
     fun addItems(items: ArrayList<AdminModel>){
         this.admList = items
@@ -24,9 +23,7 @@ class AssignmentAdapter : RecyclerView.Adapter<AssignmentAdapter.AssignmentViewH
         this.onClickItem = callback
     }
 
-    fun setOnClickDeleteItem(callback: ((AdminModel) -> Unit)){
-        this.onClickDeleteItem = callback
-    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)= AssignmentViewHolder (
         LayoutInflater.from(parent.context).inflate(R.layout.card_assignment_data,parent,false)
     )
@@ -41,16 +38,12 @@ class AssignmentAdapter : RecyclerView.Adapter<AssignmentAdapter.AssignmentViewH
         holder.itemView.setOnClickListener{
             onClickItem?.invoke(adm)
         }
-        holder.btnDelete.setOnClickListener {
-            onClickDeleteItem?.invoke(adm)
-        }
     }
 
     class AssignmentViewHolder(var view: View): RecyclerView.ViewHolder(view) {
         private var name = view.findViewById<TextView>(R.id.view_assignment_name)
         private var sdate = view.findViewById<TextView>(R.id.view_assignment_date)
         private var stype = view.findViewById<TextView>(R.id.view_assignment_type)
-        var btnDelete = view.findViewById<Button>(R.id.btnDeleteAssignment)
 
         fun bindView(adm : AdminModel){
             name.text = adm.assignment_name

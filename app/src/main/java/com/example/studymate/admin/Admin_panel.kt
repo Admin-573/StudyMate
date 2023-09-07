@@ -105,11 +105,7 @@ class Admin_panel : AppCompatActivity() {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             navView.setNavigationItemSelectedListener {
                 when (it.itemId) {
-                    R.id.admin_nav_profile -> Toast.makeText(
-                        this,
-                        "You Are On Profile",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    R.id.admin_nav_profile -> startActivity(Intent(applicationContext,Admin_view::class.java).putExtra("admin_email",adminSession.sharedPreferences.getString("email","")))
 
                     R.id.admin_nav_addfaculty -> {
                         val faculty_add = Intent(applicationContext, faculty_add::class.java)
@@ -215,7 +211,7 @@ class Admin_panel : AppCompatActivity() {
                     Log.d("rc-query",ic.toString())
 
                     if(ic  > -1){
-                        Toast.makeText(applicationContext,"RecordUpdate",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext,"Profile picture update",Toast.LENGTH_SHORT).show()
                     }else{
                         Toast.makeText(applicationContext,"Not Update",Toast.LENGTH_SHORT).show()
                     }

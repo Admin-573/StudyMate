@@ -13,7 +13,6 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>() {
 
     private var admList : ArrayList<AdminModel> = ArrayList()
     private var onClickItem : ((AdminModel) -> Unit) ?= null
-    private var onClickDeleteItem : ((AdminModel) -> Unit) ?= null
 
     fun addItems(items: ArrayList<AdminModel>){
         this.admList = items
@@ -24,9 +23,6 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>() {
         this.onClickItem = callback
     }
 
-    fun setOnClickDeleteItem(callback: ((AdminModel) -> Unit)){
-        this.onClickDeleteItem = callback
-    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)= NoticeViewHolder (
         LayoutInflater.from(parent.context).inflate(R.layout.card_notice_data,parent,false)
     )
@@ -41,16 +37,12 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>() {
         holder.itemView.setOnClickListener{
             onClickItem?.invoke(adm)
         }
-        holder.btnDelete.setOnClickListener {
-            onClickDeleteItem?.invoke(adm)
-        }
     }
 
     class NoticeViewHolder(var view: View): RecyclerView.ViewHolder(view) {
         private var name = view.findViewById<TextView>(R.id.view_notice_name)
         private var des = view.findViewById<TextView>(R.id.view_notice_des)
         private var date = view.findViewById<TextView>(R.id.view_notice_date)
-        var btnDelete = view.findViewById<Button>(R.id.btnDeleteNotice)
 
         fun bindView(adm : AdminModel){
             name.text = adm.notice_name
