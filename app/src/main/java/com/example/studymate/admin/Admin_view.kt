@@ -1,13 +1,21 @@
 package com.example.studymate.admin
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
+import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.activity.addCallback
 import com.example.studymate.R
+import com.example.studymate.database.AdminModel
 import com.example.studymate.database.SQLiteHelper
+import com.example.studymate.faculty.faculty_view
 
 class Admin_view : AppCompatActivity() {
 
@@ -17,6 +25,9 @@ class Admin_view : AppCompatActivity() {
     private lateinit var name: EditText
     private lateinit var email : EditText
     private lateinit var image : ImageView
+    private lateinit var btn_back : ImageButton
+    private lateinit var btn_add : ImageButton
+    private lateinit var btn_update : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_view)
@@ -27,6 +38,9 @@ class Admin_view : AppCompatActivity() {
         name = findViewById(R.id.Admin_updatename)
         email = findViewById(R.id.Admin_updateemail)
         image = findViewById(R.id.Admin_updateimage)
+        btn_back = findViewById(R.id.btnBack)
+        btn_add = findViewById(R.id.btnAdd)
+        btn_update = findViewById(R.id.btnAdmin_update)
 
         val adminEmail = adminSession.sharedPreferences.getString("email","").toString()
         Log.d("sessionMail", adminEmail)
@@ -49,6 +63,46 @@ class Admin_view : AppCompatActivity() {
                     image.setImageDrawable(resources.getDrawable(R.drawable.add_img))
                 }
             }
+        }
+
+        btn_back.setOnClickListener {
+            startActivity(Intent(applicationContext,Admin_panel::class.java))
+        }
+
+        btn_update.setOnClickListener {
+            if(validation()){
+                updateAdmin()
+            } else{
+                Toast.makeText(this,"Something Went Wrong", Toast.LENGTH_SHORT).show()
+            }
+        }
+        onBackPressedDispatcher.addCallback {  }
+    }
+
+    private fun validation(): Boolean {
+        if(id.length() == 0){
+            id.setError("Id Required")
+            return false
+        } else if(name.length()==0){
+            name.setError("Name Required")
+            return false
+        } else if(email.length()==0){
+            email.setError("Email Can't Be Empty")
+            return false
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()){
+            Toast.makeText(this,"Email Format Wrong !",Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
+    }
+
+    private fun updateAdmin() {
+        val admin = AdminModel( admin_id = id.text.toString().toInt(), admin_name = name.text.toString() , admin_email = email.text.toString())
+        val rc =  sqLiteHelper.updateAdminById(admin)
+        if(rc > 0){
+            Toast.makeText(applicationContext,"Update",Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(applicationContext,"Error",Toast.LENGTH_SHORT).show()
         }
     }
 }

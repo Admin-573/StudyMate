@@ -238,6 +238,20 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         db.close()
         return UpdateQuery
     }
+    //Update Admin
+    fun updateAdminById(adm: AdminModel): Int {
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(ADMIN_ID,adm.admin_id)
+        contentValues.put(ADMIN_NAME,adm.admin_name)
+        contentValues.put(ADMIN_EMAIL,adm.admin_email)
+
+        val id = adm.admin_id
+        val UpdateQuery = db.update(TBL_FACULTY,contentValues,"$ADMIN_ID = $id",null)
+        db.close()
+        return UpdateQuery
+    }
 
     //Inserting Data Of Student
     fun InsertStudent(adm : AdminModel):Long{

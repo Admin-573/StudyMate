@@ -15,6 +15,7 @@
         app:layout_constraintRight_toRightOf="parent">
 
         <ImageButton
+            android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/back_24"
@@ -38,17 +39,41 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.031">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/Admin_updateimage"
             android:layout_width="152dp"
             android:layout_height="152dp"
             android:src="@drawable/add_img"
+            app:civ_circle_background_color="#FCF5FD"
+            app:civ_border_width="4dp"
+            app:civ_border_overlay="true"
+            app:civ_border_color="#FCF5FD"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="27dp"
             android:layout_marginBottom="27dp"/>
+
+            <ImageButton
+                android:id="@+id/btnAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="104dp"
+                android:layout_marginBottom="36dp"
+                android:background="@drawable/rc1_admin"
+                android:backgroundTint="#6750A3"
+                android:contentDescription="@string/back_button"
+                android:padding="12dp"
+                android:src="@drawable/add_image24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/Admin_updateimage"
+                app:tint="#FCF5FD" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -113,7 +138,7 @@
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAdmin_update_faculty"
+            android:id="@+id/btnAdmin_update"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"

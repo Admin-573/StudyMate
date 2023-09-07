@@ -6,4 +6,5 @@
     <string name="enter_your_email_here">Enter Your Email Here ~</string>
     <string name="login">Login</string>
     <string name="go_to_home">Go to home</string>
+    <string name="back_button">Back Button</string>
 </resources>

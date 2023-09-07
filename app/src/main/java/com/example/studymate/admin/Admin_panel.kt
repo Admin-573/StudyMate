@@ -84,6 +84,8 @@ class Admin_panel : AppCompatActivity() {
                     image.setImageDrawable(resources.getDrawable(R.drawable.add_img))
                 }
             }
+        }else{
+            startActivity(Intent(applicationContext,Admin::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
         }
 
             toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
