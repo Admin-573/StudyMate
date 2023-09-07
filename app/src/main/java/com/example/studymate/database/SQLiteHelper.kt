@@ -248,7 +248,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         contentValues.put(ADMIN_EMAIL,adm.admin_email)
 
         val id = adm.admin_id
-        val UpdateQuery = db.update(TBL_FACULTY,contentValues,"$ADMIN_ID = $id",null)
+        val UpdateQuery = db.update(TBL_ADMIN,contentValues,"$ADMIN_ID = $id",null)
         db.close()
         return UpdateQuery
     }

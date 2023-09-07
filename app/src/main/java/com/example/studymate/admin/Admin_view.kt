@@ -26,7 +26,6 @@ class Admin_view : AppCompatActivity() {
     private lateinit var email : EditText
     private lateinit var image : ImageView
     private lateinit var btn_back : ImageButton
-    private lateinit var btn_add : ImageButton
     private lateinit var btn_update : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +38,6 @@ class Admin_view : AppCompatActivity() {
         email = findViewById(R.id.Admin_updateemail)
         image = findViewById(R.id.Admin_updateimage)
         btn_back = findViewById(R.id.btnBack)
-        btn_add = findViewById(R.id.btnAdd)
         btn_update = findViewById(R.id.btnAdmin_update)
 
         val adminEmail = adminSession.sharedPreferences.getString("email","").toString()
@@ -101,6 +99,7 @@ class Admin_view : AppCompatActivity() {
         val rc =  sqLiteHelper.updateAdminById(admin)
         if(rc > 0){
             Toast.makeText(applicationContext,"Update",Toast.LENGTH_SHORT).show()
+            finish()
         }else{
             Toast.makeText(applicationContext,"Error",Toast.LENGTH_SHORT).show()
         }
