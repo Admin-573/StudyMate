@@ -131,12 +131,12 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
     }
 
     @SuppressLint("Range")
-    fun getAdmin(email : String) : ArrayList<AdminModel>{
+    fun getAdmin(id : Int) : ArrayList<AdminModel>{
         val db  = this.readableDatabase
         val adminImageList : ArrayList<AdminModel> = ArrayList()
         val cursor : Cursor?
         try{
-            cursor = db.rawQuery("SELECT * FROM $TBL_ADMIN WHERE $ADMIN_EMAIL = '$email' ",null)
+            cursor = db.rawQuery("SELECT * FROM $TBL_ADMIN WHERE $ADMIN_ID = $id ",null)
         }catch (e:SQLiteException){
             e.printStackTrace()
             return adminImageList

@@ -40,11 +40,10 @@ class Admin_view : AppCompatActivity() {
         btn_back = findViewById(R.id.btnBack)
         btn_update = findViewById(R.id.btnAdmin_update)
 
-        val adminEmail = adminSession.sharedPreferences.getString("email","").toString()
-        Log.d("sessionMail", adminEmail)
+        val adminId = adminSession.sharedPreferences.getInt("id",0)
 
-        if(adminEmail!=null){
-            val admin = sqLiteHelper.getAdmin(adminEmail)
+        if(adminId!=null){
+            val admin = sqLiteHelper.getAdmin(adminId)
             if(admin.isNotEmpty()){
                 id.setText(admin[0].admin_id.toString())
                 name.setText(admin[0].admin_name)
@@ -99,7 +98,7 @@ class Admin_view : AppCompatActivity() {
         val rc =  sqLiteHelper.updateAdminById(admin)
         if(rc > 0){
             Toast.makeText(applicationContext,"Update",Toast.LENGTH_SHORT).show()
-            finish()
+            this.recreate()
         }else{
             Toast.makeText(applicationContext,"Error",Toast.LENGTH_SHORT).show()
         }

@@ -65,10 +65,10 @@ class Admin_panel : AppCompatActivity() {
         val email : TextView = view.findViewById(R.id.admin_email_head)
         val image : ImageView = view.findViewById(R.id.admin_photo)
 
-        val adminEmail = adminSession.sharedPreferences.getString("email","")
+        val adminId = adminSession.sharedPreferences.getInt("id",0)
 
-        if(adminEmail!=null){
-            val admin = sqLiteHelper.getAdmin(adminEmail)
+        if(adminId!=null){
+            val admin = sqLiteHelper.getAdmin(adminId)
             if(admin.isNotEmpty()){
                 name.text = admin[0].admin_name
                 email.text = admin[0].admin_email
