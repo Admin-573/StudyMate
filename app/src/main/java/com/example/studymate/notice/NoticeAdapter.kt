@@ -40,11 +40,13 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>() {
     }
 
     class NoticeViewHolder(var view: View): RecyclerView.ViewHolder(view) {
+        private var non = view.findViewById<TextView>(R.id.notice_date)
         private var name = view.findViewById<TextView>(R.id.view_notice_name)
         private var des = view.findViewById<TextView>(R.id.view_notice_des)
         private var date = view.findViewById<TextView>(R.id.view_notice_date)
 
         fun bindView(adm : AdminModel){
+            non.text = adm.notice_txt
             name.text = adm.notice_name
             des.text = adm.notice_des
             date.text = adm.notice_date

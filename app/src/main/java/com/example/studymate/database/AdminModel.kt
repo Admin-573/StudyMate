@@ -24,11 +24,13 @@ data class AdminModel (
     var student_class : String = "",
 
     //Notice Content
+    var notice_txt : String = "Notice Date : ",
     var notice_name : String = "",
     var notice_des : String = "",
     var notice_date : String = "",
 
     //Assignment Content
+    var assignment_txt : String = "Submit ON : ",
     var assignment_name : String = "",
     var assignment_sdate : String = "",
     var assignment_type : String = "",

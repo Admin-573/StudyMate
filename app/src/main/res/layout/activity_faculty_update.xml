@@ -173,12 +173,10 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDeleteFaculty"
-            style="@style/Widget.Material3.Button"
+            style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
             android:translationZ="@null"
-            android:elevation="3dp"
             android:textColor="#F44336"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"

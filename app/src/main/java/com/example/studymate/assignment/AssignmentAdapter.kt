@@ -41,11 +41,13 @@ class AssignmentAdapter : RecyclerView.Adapter<AssignmentAdapter.AssignmentViewH
     }
 
     class AssignmentViewHolder(var view: View): RecyclerView.ViewHolder(view) {
+        private var son = view.findViewById<TextView>(R.id.sdate_assign)
         private var name = view.findViewById<TextView>(R.id.view_assignment_name)
         private var sdate = view.findViewById<TextView>(R.id.view_assignment_date)
         private var stype = view.findViewById<TextView>(R.id.view_assignment_type)
 
         fun bindView(adm : AdminModel){
+            son.text = adm.assignment_txt
             name.text = adm.assignment_name
             sdate.text = adm.assignment_sdate
             stype.text = adm.assignment_type
