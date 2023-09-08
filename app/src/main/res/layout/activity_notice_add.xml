@@ -58,7 +58,6 @@
             android:layout_marginTop="12sp"
             android:fontFamily="@font/ubuntu"
             android:text="Add Notices ~"
-            android:textColor="@color/black"
             android:textSize="24sp" />
 
         <com.airbnb.lottie.LottieAnimationView

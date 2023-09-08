@@ -55,12 +55,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/ubuntu"
-            android:text="Add Assignments 📚"
-            android:textColor="@color/black"
-            android:textSize="24sp"
             android:layout_marginTop="6sp"
-            android:layout_marginBottom="6sp"/>
+            android:layout_marginBottom="6sp"
+            android:fontFamily="@font/ubuntu"
+            android:text="Add Assignments"
+            android:textSize="24sp" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/under_dev"
@@ -109,9 +108,9 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/calendar"
                 android:drawablePadding="10dp"
+                android:focusable="auto"
                 android:hint="Submit Date"
-                android:inputType="none"
-                android:focusable="auto"/>
+                android:inputType="none" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
