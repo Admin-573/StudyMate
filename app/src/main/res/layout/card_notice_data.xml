@@ -28,7 +28,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ubuntu"
-                android:textColor="@color/black"
                 tools:text="Notice Date : " />
 
             <TextView
@@ -38,7 +37,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ubuntu"
-                android:textColor="@color/black"
                 tools:text="Date" />
 
         </LinearLayout>
@@ -60,7 +58,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12dp"
-            android:textColor="@color/black"
             android:fontFamily="@font/ubuntu"
             tools:text="Notice Des"/>
 

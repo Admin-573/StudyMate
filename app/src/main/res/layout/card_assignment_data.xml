@@ -28,7 +28,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ubuntu"
-                android:textColor="@color/black"
                 tools:text="Submit On : " />
 
             <TextView
@@ -38,7 +37,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ubuntu"
-                android:textColor="@color/black"
                 tools:text="Date" />
 
         </LinearLayout>
@@ -59,8 +57,7 @@
             android:layout_marginBottom="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12dp"
-            android:textColor="@color/black"
+            android:textSize="13dp"
             android:fontFamily="@font/ubuntu"
             tools:text="Assignment Des"/>
 

@@ -79,7 +79,7 @@ class Admin : AppCompatActivity() {
             finish()
         }
         else {
-            Toast.makeText(this,"Something went wrong !",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Something Went Wrong !",Toast.LENGTH_SHORT).show()
         }
     }
 
