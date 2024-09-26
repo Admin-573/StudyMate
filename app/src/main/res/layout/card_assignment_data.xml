@@ -16,36 +16,52 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <TextView
-            android:textSize="16dp"
-            android:layout_marginBottom="4dp"
-            android:id="@+id/view_assignment_date"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/ubuntu"
-            android:textColor="@color/black"
-            tools:text="Date" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:textSize="16dp"
+                android:layout_marginBottom="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ubuntu"
+                android:textColor="@color/black"
+                tools:text="Submit On : " />
+
+            <TextView
+                android:textSize="16dp"
+                android:layout_marginBottom="4dp"
+                android:id="@+id/view_assignment_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ubuntu"
+                android:textColor="@color/black"
+                tools:text="Date" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/view_assignment_name"
             android:layout_marginBottom="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:fontFamily="@font/ubuntu"
-            tools:text="Notice Name"/>
+            tools:text="Assignment Name"/>
 
         <TextView
             android:id="@+id/view_assignment_type"
             android:layout_marginBottom="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
+            android:textSize="14dp"
             android:textColor="@color/black"
             android:fontFamily="@font/ubuntu"
-            tools:text="Notice Des"/>
+            tools:text="Assignment Des"/>
 
     </LinearLayout>
 

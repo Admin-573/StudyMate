@@ -16,22 +16,38 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <TextView
-            android:textSize="16dp"
-            android:layout_marginBottom="4dp"
-            android:id="@+id/view_notice_date"
-            android:layout_width="wrap_content"
+        <LinearLayout
             android:layout_height="wrap_content"
-            android:fontFamily="@font/ubuntu"
-            android:textColor="@color/black"
-            tools:text="Date" />
+            android:layout_width="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textSize="16dp"
+                android:layout_marginBottom="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ubuntu"
+                android:textColor="@color/black"
+                tools:text="Notice Date : " />
+
+            <TextView
+                android:textSize="16dp"
+                android:layout_marginBottom="4dp"
+                android:id="@+id/view_notice_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ubuntu"
+                android:textColor="@color/black"
+                tools:text="Date" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/view_notice_name"
             android:layout_marginBottom="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:fontFamily="@font/ubuntu"
@@ -42,7 +58,7 @@
             android:layout_marginBottom="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
+            android:textSize="14dp"
             android:textColor="@color/black"
             android:fontFamily="@font/ubuntu"
             tools:text="Notice Des"/>

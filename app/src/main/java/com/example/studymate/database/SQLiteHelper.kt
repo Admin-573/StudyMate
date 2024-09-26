@@ -5,8 +5,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
-import java.lang.Exception
 
 class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
     DATABASE_NAME,null,
@@ -19,11 +19,14 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
 
         //Admin Table
         private const val TBL_ADMIN = "tbl_admin"
+        private const val ADMIN_IMAGE = "admin_image"
         private const val ADMIN_NAME = "admin_name"
         private const val ADMIN_EMAIL = "admin_email"
 
         //Faculty Table
         private const val TBL_FACULTY = "tbl_faculty"
+        private const val FACULTY_ID = "faculty_id"
+        private const val FACULTY_IMAGE = "faculty_image"
         private const val FACULTY_NAME = "faculty_name"
         private const val FACULTY_EMAIL = "faculty_email"
         private const val FACULTY_PASSWORD = "faculty_password"
@@ -31,6 +34,8 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
 
         //Student Table
         private const val TBL_STUDENT = "tbl_student"
+        private const val STUDENT_ID = "student_id"
+        private const val STUDENT_IMAGE = "student_image"
         private const val STUDENT_NAME = "student_name"
         private const val STUDENT_EMAIL = "student_email"
         private const val STUDENT_PASSWORD = "student_password"
@@ -51,15 +56,15 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
 
     override fun onCreate(p0: SQLiteDatabase?) {
         //Admin Table
-        val createTblAdmin = "CREATE TABLE $TBL_ADMIN($ADMIN_NAME TEXT,$ADMIN_EMAIL VARCHAR(128) PRIMARY KEY);"
+        val createTblAdmin = "CREATE TABLE $TBL_ADMIN($ADMIN_IMAGE BLOB,$ADMIN_NAME TEXT NOT NULL,$ADMIN_EMAIL VARCHAR(128) PRIMARY KEY);"
         p0?.execSQL(createTblAdmin)
 
         //Faculty Table
-        val createTblFaculty = "CREATE TABLE $TBL_FACULTY($FACULTY_NAME TEXT,$FACULTY_EMAIL VARCHAR(128) PRIMARY KEY,$FACULTY_PASSWORD TEXT,$FACULTY_SUB VARCHAR(256));"
+        val createTblFaculty = "CREATE TABLE $TBL_FACULTY($FACULTY_ID INT PRIMARY KEY,$FACULTY_IMAGE BLOB,$FACULTY_NAME TEXT,$FACULTY_EMAIL VARCHAR(128) UNIQUE NOT NULL,$FACULTY_PASSWORD TEXT,$FACULTY_SUB VARCHAR(256));"
         p0?.execSQL(createTblFaculty)
 
         //Student Table
-        val createTblStudent = "CREATE TABLE $TBL_STUDENT($STUDENT_NAME TEXT,$STUDENT_EMAIL VARCHAR(128) PRIMARY KEY,$STUDENT_PASSWORD TEXT,$STUDENT_CLASS VARCHAR(256));"
+        val createTblStudent = "CREATE TABLE $TBL_STUDENT($STUDENT_ID INT PRIMARY KEY , $STUDENT_IMAGE BLOB,$STUDENT_NAME TEXT,$STUDENT_EMAIL VARCHAR(128) UNIQUE NOT NULL,$STUDENT_PASSWORD TEXT,$STUDENT_CLASS VARCHAR(256));"
         p0?.execSQL(createTblStudent)
 
         //Notice Table
@@ -111,6 +116,8 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         val db = this.writableDatabase
 
         val contentValues = ContentValues()
+        contentValues.put(FACULTY_ID,adm.faculty_id)
+        contentValues.put(FACULTY_IMAGE,adm.faculty_image)
         contentValues.put(FACULTY_NAME,adm.faculty_name)
         contentValues.put(FACULTY_EMAIL,adm.faculty_email)
         contentValues.put(FACULTY_PASSWORD,adm.faculty_password)
@@ -120,6 +127,42 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         db.close()
         return insertQuery
     }
+
+    fun getAdmin(email : String) : ArrayList<AdminModel>{
+        val db  = this.readableDatabase
+        val adminImageList : ArrayList<AdminModel> = ArrayList()
+        val cursor : Cursor?
+        try{
+            cursor = db.rawQuery("SELECT * FROM $TBL_ADMIN WHERE $ADMIN_EMAIL = '$email' ",null)
+        }catch (e:SQLiteException){
+            e.printStackTrace()
+            return adminImageList
+        }
+        if(cursor.moveToFirst()){
+            do{
+                val admin = AdminModel(
+                    admin_image = cursor.getBlob(cursor.getColumnIndex("admin_image")),
+                    admin_email = cursor.getString(cursor.getColumnIndex("admin_email")),
+                    admin_name = cursor.getString(cursor.getColumnIndex("admin_name"))
+                )
+                adminImageList.add(admin)
+            }while (cursor.moveToNext())
+        }
+        return adminImageList
+    }
+
+    fun updateImage(adm: AdminModel): Int {
+
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+
+        contentValues.put(ADMIN_IMAGE,adm.admin_image)
+        val email = adm.admin_email
+        val uploadImage = db.update(TBL_ADMIN,contentValues, "$ADMIN_EMAIL = '$email'",null)
+        db.close()
+        return  uploadImage
+    }
+
 
     //Displaying Data Of Faculty
     @SuppressLint("Range")
@@ -139,6 +182,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
             return ArrayList()
         }
 
+        var image:ByteArray
         var name : String
         var email : String
         var password : String
@@ -146,13 +190,13 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
 
         if(cursor.moveToFirst()){
             do{
-
+                image = cursor.getBlob(cursor.getColumnIndex(FACULTY_IMAGE))
                 name = cursor.getString(cursor.getColumnIndex("faculty_name"))
                 email = cursor.getString(cursor.getColumnIndex("faculty_email"))
                 password = cursor.getString(cursor.getColumnIndex("faculty_password"))
                 subject = cursor.getString(cursor.getColumnIndex("faculty_sub"))
 
-                val adm = AdminModel(faculty_name = name, faculty_email = email, faculty_password = password, faculty_sub = subject)
+                val adm = AdminModel(faculty_image = image,faculty_name = name, faculty_email = email, faculty_password = password, faculty_sub = subject)
                 admList.add(adm)
 
             } while (cursor.moveToNext())
@@ -167,7 +211,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         val contentValues = ContentValues()
         contentValues.put(FACULTY_EMAIL,email)
 
-        val DeleteQuery = db.delete(TBL_FACULTY,"faculty_email=$FACULTY_EMAIL",null)
+        val DeleteQuery = db.delete(TBL_FACULTY, "$FACULTY_EMAIL = '$email' " ,null)
         db.close()
         return DeleteQuery
     }
@@ -192,6 +236,8 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         val db = this.writableDatabase
 
         val contentValues = ContentValues()
+        contentValues.put(STUDENT_ID,adm.student_id)
+        contentValues.put(STUDENT_IMAGE,adm.student_image)
         contentValues.put(STUDENT_NAME,adm.student_name)
         contentValues.put(STUDENT_EMAIL,adm.student_email)
         contentValues.put(STUDENT_PASSWORD,adm.student_password)
@@ -207,7 +253,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
     fun getAllStudent() : ArrayList<AdminModel>
     {
         val admList : ArrayList<AdminModel> = ArrayList()
-        val selectQuery = "SELECT * FROM $TBL_STUDENT"
+        val selectQuery = "SELECT * FROM $TBL_STUDENT ORDER BY $STUDENT_CLASS"
         val db = this.writableDatabase
 
         val cursor : Cursor?
@@ -219,7 +265,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
             db.execSQL(selectQuery)
             return ArrayList()
         }
-
+        var image : ByteArray
         var name : String
         var email : String
         var password : String
@@ -227,13 +273,13 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
 
         if(cursor.moveToFirst()){
             do{
-
+                image = cursor.getBlob(cursor.getColumnIndex(STUDENT_IMAGE))
                 name = cursor.getString(cursor.getColumnIndex("student_name"))
                 email = cursor.getString(cursor.getColumnIndex("student_email"))
                 password = cursor.getString(cursor.getColumnIndex("student_password"))
                 stud_class = cursor.getString(cursor.getColumnIndex("student_class"))
 
-                val adm = AdminModel(student_name = name, student_email = email, student_password = password, student_class = stud_class)
+                val adm = AdminModel(student_name = name, student_email = email, student_password = password, student_class = stud_class, student_image = image)
                 admList.add(adm)
 
             } while (cursor.moveToNext())
@@ -248,7 +294,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context,
         val contentValues = ContentValues()
         contentValues.put(STUDENT_EMAIL,email)
 
-        val DeleteQuery = db.delete(TBL_STUDENT,"student_email=$STUDENT_EMAIL",null)
+        val DeleteQuery = db.delete(TBL_STUDENT,"$STUDENT_EMAIL = '$email' ",null)
         db.close()
         return DeleteQuery
     }

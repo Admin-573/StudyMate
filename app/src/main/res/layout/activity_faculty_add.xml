@@ -26,19 +26,17 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="22sp" />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/under_dev"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/faculty_image"
+            android:layout_width="92dp"
+            android:layout_height="92dp"
+            android:src="@drawable/add_img"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/admin_add_faculty" />
+            android:layout_marginTop="52dp"
+            android:layout_marginBottom="32dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"

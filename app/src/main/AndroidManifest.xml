@@ -13,6 +13,12 @@
         android:theme="@style/Theme.StudyMate"
         tools:targetApi="31">
         <activity
+            android:name=".AboutUs"
+            android:exported="false" />
+        <activity
+            android:name=".ContactUs"
+            android:exported="false" />
+        <activity
             android:name=".student.student_update"
             android:exported="false" />
         <activity
